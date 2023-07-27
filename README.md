@@ -57,3 +57,9 @@
 * [Pranshu Jain](https://www.linkedin.com/in/pranshu-jain-7689041a5/)
 * [Ruchi Sahu](https://www.linkedin.com/in/ruchi-sahu/)
 * [Adityaraj Singh Rathore](https://www.linkedin.com/in/adityaraj-singh-rathore/)
+
+## Current Goals
+
+- To use the web app in web view of mobile app
+- To connect the mobile application to database
+- To show the attendance on the mobile application
