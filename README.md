@@ -23,7 +23,7 @@
 - Database : MongoDB
 - APIs : FaceAPI, ImageKit
 
-## Contributing
+## Contributions
 
 - The main purpose of this repository is to continue evolving the project by making it faster, more usable for teachers and highly efficient.
 - To know about code structure, strictly refer CONTRIBUTION.md file.
