@@ -1,4 +1,4 @@
-## [A System and Method for Taking Attendance in Educational and Professional Settings]
+## A System and Method for Taking Attendance in Educational and Professional Settings
 
 - Web Application for a Smart Attendance System based on Facial Recognition Method
 
@@ -30,6 +30,7 @@
 
 - Steps to contribute :-
   - **Fork Repository** - https://github.com/vaibhav-neema/facial-recognition-based-attendance-system-react
+  - **Cut a New Branch from 'main'**
   - **Make Required Changes** - includes addition of any feature/refactoring code/change in documentation
   - **Strictly Follow Conventions for Commit Message** - refer CONTRIBUTION.md file for commit message structure
   - **Create Pull Request** - to be reviewed by development team and then merged by [Dr. Vaibhav Neema](https://www.linkedin.com/in/dr-vaibhav-neema-5981677a/)
@@ -50,7 +51,7 @@
 
 - Database Management & Documentation
 
-* [Utkarsh Gupte]
+* Utkarsh Gupte
 * [Anjali Phadke](https://www.linkedin.com/in/anjali-phadke-604986251/)
 * [Pranshu Jain](https://www.linkedin.com/in/pranshu-jain-7689041a5/)
 * [Ruchi Sahu](https://www.linkedin.com/in/ruchi-sahu/)

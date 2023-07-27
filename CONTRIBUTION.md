@@ -1,6 +1,6 @@
 # Commit Message Structure
 
-- **prefix1 - doc/feature/refactor/bugfix/design/test**
+- **prefix1 - (`doc`/`feature`/`refactor`/`bugfix`/`design`/`test`)**
 
   - doc : for any changes related to documentation
   - feature : code related changes that impact functionality of the application
@@ -9,7 +9,7 @@
   - design : any changes made to css/scss file
   - test : any changes related to test cases
 
-- **prefix2 (in curly braces) - component/page/readme/contribution/project**
+- **prefix2 (in curly braces) - (`component`/`page`/`readme`/`contribution`/`project`)**
 
   - component : for any changes related to any component
   - page : code related changes that impacts functionality of any page
@@ -17,10 +17,10 @@
   - contribution : changes related to CONTRIBUTION.md file
   - project : any changes affecting the whole project
 
-- **body (in one line) - give a logical short detail about the commit**
+- **body (in one line) - give a brief logical info about the changes done**
 
-- structure : **prefix1(prefix2) : body**
-- eg. : doc(project) : updated README.md file and added CONTRIBUTION.md file
+- structure - `prefix1(prefix2) : body`
+- eg. : `doc(project) : updated README.md file and added CONTRIBUTION.md file`
 
 # JS Files Name Structure
 
