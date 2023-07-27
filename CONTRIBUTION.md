@@ -9,7 +9,7 @@
   - design : any changes made to css/scss file
   - test : any changes related to test cases
 
-- **prefix2 (in curly braces) - (`component`/`page`/`readme`/`contribution`/`project`)**
+- **prefix2 (in parenthesis) - (`component`/`page`/`readme`/`contribution`/`project`)**
 
   - component : for any changes related to any component
   - page : code related changes that impacts functionality of any page
