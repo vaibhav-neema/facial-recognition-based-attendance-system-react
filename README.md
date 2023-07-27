@@ -30,10 +30,11 @@
 
 - Steps to contribute :-
   - **Fork Repository** - https://github.com/vaibhav-neema/facial-recognition-based-attendance-system-react
-  - **Cut a New Branch from 'main'**
+  - **Cut a New Branch from `main`** - eg. `task/changing-readme-file`
   - **Make Required Changes** - includes addition of any feature/refactoring code/change in documentation
   - **Strictly Follow Conventions for Commit Message** - refer CONTRIBUTION.md file for commit message structure
   - **Create Pull Request** - to be reviewed by development team and then merged by [Dr. Vaibhav Neema](https://www.linkedin.com/in/dr-vaibhav-neema-5981677a/)
+  - **Merge Request to `main` Branch of Base Repository**
 
 ## Development Team
 
