@@ -40,6 +40,8 @@ e.g. - To create `Icon` component -
 ```js
       // All React specific imports like `react`.
       // All third party library imports like `classnames` or `prop-types`.
+      // Use Deconstructors to use multiple imports from the same library
+
       <new_line>
       // All internal imports from `components`, `assets`.
       <new_line>
