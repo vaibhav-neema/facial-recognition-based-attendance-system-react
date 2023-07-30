@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { loadModels } from "../../utils/loadedModels";
+
+import AppBar from "../../components/AppBar";
 
 import "./index.scss";
+import ImageCard from "../../components/ImageCard";
+import Separator from "../../components/Separator";
 
 const HomePage = () => {
+  useEffect(() => {
+    // load the models when homePage mounts
+    loadModels();
+  }, []);
+
   return (
-    <div className="container">
-      <div className="title">Smart Attendance System</div>
-      <div className="sub-title">
-        A System and Method for Taking Attendance in Educational and Professional Settings
+    <div id="root-container">
+      <AppBar />
+      <Separator />
+      <div className="image-container">
+        <ImageCard labelKey="upload" />
+      </div>
+
+      <div className="attendance-list">
+        <ol className="records"></ol>
       </div>
     </div>
   );

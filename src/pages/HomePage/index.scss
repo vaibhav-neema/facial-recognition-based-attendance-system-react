@@ -1,31 +1,19 @@
 body {
   margin: 0;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
 }
 
-.container {
-  height: 15vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+.image-container {
+  height: 50%;
+  margin: 2px 4px 5px 2px;
 }
 
-.title {
-  color: black;
+.attendance-list {
+  padding-left: 10%;
+  display: block;
   font-family: Geologica;
-  font-size: 22px;
+  font-style: normal;
   font-weight: bold;
-  text-align: center;
-}
-
-.sub-title {
-  color: black;
-  font-family: Geologica;
-  font-size: 20px;
-  text-align: center;
+  font-size: 15px;
 }
