@@ -21,6 +21,7 @@ const AppBar = ({ title, subTitle }) => {
       </div>
 
       <RefreshIcon onClickHandler={reloadPage} />
+
     </div>
   );
 };
