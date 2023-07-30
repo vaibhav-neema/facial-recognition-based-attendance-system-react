@@ -7,6 +7,10 @@ import RefreshIcon from "../RefreshIcon";
 import "./index.scss";
 
 const AppBar = ({ title, subTitle }) => {
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="app-bar">
       <Logo />
@@ -16,7 +20,7 @@ const AppBar = ({ title, subTitle }) => {
         <div className="sub-title">{subTitle}</div>
       </div>
 
-      <RefreshIcon />
+      <RefreshIcon onClickHandler={reloadPage} />
     </div>
   );
 };
