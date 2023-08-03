@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { loadModels } from "../../utils/loadedModels";
 
 import AppBar from "../../components/AppBar";
-
-import "./index.scss";
 import ImageCard from "../../components/ImageCard";
 import Separator from "../../components/Separator";
+
+import "./index.scss";
 
 const HomePage = () => {
   useEffect(() => {
