@@ -24,6 +24,10 @@ const HomePage = () => {
 
       <div className="attendance-list">
         <ol className="records"></ol>
+        <div style={{ direction: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+          <p className="total"></p>
+          <p className="unknowns"></p>
+        </div>
       </div>
     </div>
   );

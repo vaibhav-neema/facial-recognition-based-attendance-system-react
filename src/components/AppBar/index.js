@@ -21,7 +21,6 @@ const AppBar = ({ title, subTitle }) => {
       </div>
 
       <RefreshIcon onClickHandler={reloadPage} />
-
     </div>
   );
 };
@@ -36,4 +35,4 @@ AppBar.propTypes = {
   subTitle: PropTypes.string,
 };
 
-export default AppBar;
+export default React.memo(AppBar);

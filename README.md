@@ -51,15 +51,12 @@
 * [Sumiran Jaiswal](https://www.linkedin.com/in/sumiran-jaiswal-b8199a21b/)
 * [Antriksh Tyagi](https://www.linkedin.com/in/antrikshtyagi/)
 * [Divyanshu Parwal](https://www.linkedin.com/in/divyanshu-parwal/)
-* [Rishi Gupta](https://www.linkedin.com/in/rishi-gupta-027298204/)
 
 - Database Management & Documentation
 
 * Utkarsh Gupte
 * [Anjali Phadke](https://www.linkedin.com/in/anjali-phadke-604986251/)
 * [Pranshu Jain](https://www.linkedin.com/in/pranshu-jain-7689041a5/)
-* [Ruchi Sahu](https://www.linkedin.com/in/ruchi-sahu/)
-* [Adityaraj Singh Rathore](https://www.linkedin.com/in/adityaraj-singh-rathore/)
 
 ## Current Goals
 

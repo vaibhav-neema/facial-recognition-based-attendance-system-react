@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, memo, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 import { bufferToImage } from "face-api.js";
 import { executeRecognition } from "../../utils/executeRecognition";
+import { getStudentData } from "../../utils/studentData";
 
 import Button from "../Button";
 
@@ -10,8 +11,13 @@ import "./index.scss";
 
 const ImageCard = ({ labelKey }) => {
   const imageFiles = [];
+  const studentData = useRef([]);
   let finalList = [];
   const [showImageIcon, setShowImageIcon] = useState(true);
+
+  useEffect(() => {
+    studentData.current = getStudentData();
+  }, []);
 
   const removeDuplicates = (arr) => {
     return arr.filter((item, index) => arr.indexOf(item) === index);
@@ -53,8 +59,10 @@ const ImageCard = ({ labelKey }) => {
       addImageForFrame(imageFiles[i], i);
     }
 
+    localStorage.setItem("unknown", "0");
+
     for (let i = 0; i < imageFiles.length; i++) {
-      await executeRecognition(imageFiles[i], i);
+      await executeRecognition(imageFiles[i], i, studentData.current);
       document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
     }
 
@@ -64,9 +72,19 @@ const ImageCard = ({ labelKey }) => {
       finalList.push(string);
     }
 
+    let detected;
+
+    if (event.target.files.length === 1) {
+      detected = finalList.length;
+    }
+
     finalList.sort();
     document.querySelector(".records").innerHTML = "";
     finalList = removeDuplicates(finalList);
+
+    if (event.target.files.length > 1) {
+      detected = finalList.length;
+    }
 
     for (let i = 0; i < finalList.length; i++) {
       var li = document.createElement("li");
@@ -74,12 +92,21 @@ const ImageCard = ({ labelKey }) => {
       document.querySelector(".records").appendChild(li);
     }
 
+    const total = document.querySelector(".total");
+    const unknowns = document.querySelector(".unknowns");
+    const unknown = parseInt(localStorage.getItem("unknown"));
+
+    total.textContent = `Total : ${detected + unknown}`;
+    unknowns.textContent = `Unknown(s) : ${unknown}`;
+
     window.scrollTo(0, document.body.scrollHeight);
   };
 
   const uploadButtonClickHandler = () => {
     document.querySelector(".images-container").innerHTML = "";
     document.querySelector(".records").innerHTML = "";
+    document.querySelector(".unknowns").innerHTML = "";
+    document.querySelector(".total").innerHTML = "";
 
     setShowImageIcon(true);
   };
@@ -123,4 +150,4 @@ ImageCard.propTypes = {
   labelKey: PropTypes.string,
 };
 
-export default ImageCard;
+export default memo(ImageCard);
