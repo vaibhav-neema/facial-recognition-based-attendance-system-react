@@ -23,4 +23,4 @@ RefreshIcon.propTypes = {
   onClickHandler: PropTypes.func,
 };
 
-export default RefreshIcon;
+export default React.memo(RefreshIcon);

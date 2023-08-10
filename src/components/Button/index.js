@@ -25,4 +25,4 @@ Button.propTypes = {
   onClickHandler: PropTypes.func,
 };
 
-export default Button;
+export default React.memo(Button);
