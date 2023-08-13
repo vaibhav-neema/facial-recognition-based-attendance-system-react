@@ -17,17 +17,11 @@ const HomePage = () => {
   return (
     <div id="root-container">
       <AppBar />
+
       <Separator />
+
       <div className="image-container">
         <ImageCard labelKey="upload" />
-      </div>
-
-      <div className="attendance-list">
-        <ol className="records"></ol>
-        <div style={{ direction: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-          <p className="total"></p>
-          <p className="unknowns"></p>
-        </div>
       </div>
     </div>
   );

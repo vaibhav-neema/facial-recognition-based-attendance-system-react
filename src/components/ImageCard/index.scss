@@ -4,9 +4,9 @@
   justify-content: center;
   align-items: center;
   min-height: 40vh;
-  width: 100%;
+  width: 97%;
   color: rgba(46, 108, 54, 1);
-  border: 1px rgba(46, 108, 54, 1) solid;
+  border: 2px rgba(46, 108, 54, 1) solid;
   border-radius: 1rem;
 
   input {
@@ -48,10 +48,4 @@
   font-size: 15px;
   margin-top: 0.3em;
   margin-bottom: 0.3em;
-}
-
-.button-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
