@@ -6,22 +6,22 @@ import { executeRecognition } from "../../utils/executeRecognition";
 import { getStudentData } from "../../utils/studentData";
 
 import Button from "../Button";
+import TextBox from "../TextBox";
 
 import "./index.scss";
+import { downloadAttendance } from "../../utils/downloadAttendance";
 
 const ImageCard = ({ labelKey }) => {
   const imageFiles = [];
   const studentData = useRef([]);
   let finalList = [];
+
   const [showImageIcon, setShowImageIcon] = useState(true);
+  const [showDownloadButton, setShowDownloadButton] = useState(false);
 
   useEffect(() => {
     studentData.current = getStudentData();
   }, []);
-
-  const removeDuplicates = (arr) => {
-    return arr.filter((item, index) => arr.indexOf(item) === index);
-  };
 
   const addImageForFrame = async (imageFile, index) => {
     const holder = document.createElement("div");
@@ -51,7 +51,18 @@ const ImageCard = ({ labelKey }) => {
 
     setShowImageIcon(false);
 
-    for (let i = 0; i < event.target.files.length; i++) {
+    const studentDataFetch = await studentData.current;
+    let studentDataHashMap = new Map();
+    const imageFileLength = event.target.files.length;
+    let detected = 0;
+
+    for (let i = 0; i < studentDataFetch.length; i++) {
+      studentDataHashMap.set(studentDataFetch[i]._label, 0);
+    }
+
+    studentDataHashMap.set("unknown", 0);
+
+    for (let i = 0; i < imageFileLength; i++) {
       imageFiles.push(event.target.files[i]);
     }
 
@@ -62,52 +73,55 @@ const ImageCard = ({ labelKey }) => {
     localStorage.setItem("unknown", "0");
 
     for (let i = 0; i < imageFiles.length; i++) {
-      await executeRecognition(imageFiles[i], i, studentData.current);
-      document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
+      await executeRecognition(
+        imageFiles[i],
+        i,
+        studentData.current,
+        studentDataHashMap
+      );
+      document
+        .querySelector(`#holder${i}`)
+        .removeChild(document.querySelector("#is-computing-label"));
     }
 
-    for (let i = 0; i < document.querySelector(".records").children.length; i++) {
-      let string = document.querySelector(".records").children[i].innerText;
-      string = string.substring(0, string.indexOf("("));
-      finalList.push(string);
-    }
+    studentDataHashMap.forEach((value, key) => {
+      detected += value;
+      if (value >= 1) {
+        finalList.push(key);
+      }
+    });
 
-    let detected;
+    const textBox = document.querySelector(".text-box-input");
+    textBox.value = "";
+    textBox.style.textAlign = "left";
+    textBox.removeAttribute("readonly");
+    textBox.setAttribute("rows", finalList.length + 3);
 
-    if (event.target.files.length === 1) {
-      detected = finalList.length;
-    }
+    finalList.forEach((element, i) => {
+      textBox.value += `${i + 1}) ${element}\n`;
+    });
 
-    finalList.sort();
-    document.querySelector(".records").innerHTML = "";
-    finalList = removeDuplicates(finalList);
+    textBox.value += `\nUnknown Students : ${localStorage.getItem("unknown")}`;
+    textBox.value += `\nTotal Students : ${
+      imageFileLength === 1
+        ? parseInt(localStorage.getItem("unknown")) + detected
+        : parseInt(localStorage.getItem("unknown")) + finalList.length
+    }`;
 
-    if (event.target.files.length > 1) {
-      detected = finalList.length;
-    }
-
-    for (let i = 0; i < finalList.length; i++) {
-      var li = document.createElement("li");
-      li.appendChild(document.createTextNode(finalList[i]));
-      document.querySelector(".records").appendChild(li);
-    }
-
-    const total = document.querySelector(".total");
-    const unknowns = document.querySelector(".unknowns");
-    const unknown = parseInt(localStorage.getItem("unknown"));
-
-    total.textContent = `Total : ${detected + unknown}`;
-    unknowns.textContent = `Unknown(s) : ${unknown}`;
+    setShowDownloadButton(true);
 
     window.scrollTo(0, document.body.scrollHeight);
   };
 
   const uploadButtonClickHandler = () => {
     document.querySelector(".images-container").innerHTML = "";
-    document.querySelector(".records").innerHTML = "";
-    document.querySelector(".unknowns").innerHTML = "";
-    document.querySelector(".total").innerHTML = "";
 
+    document.querySelector(".text-box-input").style.textAlign = "center";
+    document.querySelector(".text-box-input").value = "";
+    document.querySelector(".text-box-input").readOnly = true;
+    document.querySelector(".text-box-input").setAttribute("rows", 1);
+
+    setShowDownloadButton(false);
     setShowImageIcon(true);
   };
 
@@ -134,10 +148,21 @@ const ImageCard = ({ labelKey }) => {
         )}
       </div>
 
-      <div className="button-container">
-        <Button iconType="cloud_upload" labelKey="upload" onClickHandler={uploadButtonClickHandler} />
-        {/* <Button iconType="groups" /> */}
-      </div>
+      <TextBox
+        showDownloadButton={showDownloadButton}
+        onDownloadButtonClick={() =>
+          downloadAttendance(
+            "testFile",
+            document.querySelector(".text-box-input").value
+          )
+        }
+      />
+
+      <Button
+        iconType="cloud_upload"
+        labelKey="upload"
+        onClickHandler={uploadButtonClickHandler}
+      />
     </>
   );
 };

@@ -1,0 +1,39 @@
+.attendance-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  width: 91.75%;
+}
+
+.text-box-input {
+  display: block;
+  align-self: center;
+  width: 100%;
+  padding: 3%;
+  border: 2px rgba(46, 108, 54, 1) solid;
+  border-radius: 1rem;
+  font-family: Geologica;
+  font-style: normal;
+  font-size: 14px;
+  color: rgba(46, 108, 54, 1);
+  text-align: center;
+  resize: none;
+}
+
+.download-button {
+  position: absolute;
+  bottom: 0.5rem;
+  right: -0.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  background-color: rgba(46, 108, 54, 1);
+  border-radius: 50%;
+  color: white;
+}

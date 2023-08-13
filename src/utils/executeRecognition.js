@@ -13,7 +13,12 @@ let image;
 let canvas;
 const sortedList = [];
 
-export const executeRecognition = async (imageFile, index, studentDataRcvd) => {
+export const executeRecognition = async (
+  imageFile,
+  index,
+  studentDataRcvd,
+  hashMap
+) => {
   const studentData = await studentDataRcvd;
 
   while (sortedList.length !== 0) {
@@ -29,17 +34,24 @@ export const executeRecognition = async (imageFile, index, studentDataRcvd) => {
   };
   matchDimensions(canvas, displaySize);
 
-  const detections = await detectAllFaces(image, new SsdMobilenetv1Options({ minConfidence: 0.35 }))
+  const detections = await detectAllFaces(
+    image,
+    new SsdMobilenetv1Options({ minConfidence: 0.35 })
+  )
     .withFaceLandmarks()
     .withFaceDescriptors();
   const resizeDetections = resizeResults(detections, displaySize);
-  const results = resizeDetections.map((d) => new FaceMatcher(studentData, 0.51).findBestMatch(d.descriptor));
+  const results = resizeDetections.map((d) =>
+    new FaceMatcher(studentData, 0.51).findBestMatch(d.descriptor)
+  );
 
   let unknown = parseInt(localStorage.getItem("unknown"));
 
   results.forEach((student) => {
     if (student.label !== "unknown") {
-      sortedList.push(student.toString());
+      if (hashMap.has(student.label) && hashMap.get(student.label) === 0) {
+        hashMap.set(student.label, 1);
+      }
     } else {
       unknown++;
     }
@@ -56,13 +68,4 @@ export const executeRecognition = async (imageFile, index, studentDataRcvd) => {
 
   canvas.style.position = "absolute";
   canvas.style.top = "0";
-
-  sortedList.sort();
-
-  for (let i = 0; i < sortedList.length; i++) {
-    const li = document.createElement("li");
-    li.setAttribute("class", "record");
-    li.appendChild(document.createTextNode(sortedList[i]));
-    document.querySelector(".records").appendChild(li);
-  }
 };
