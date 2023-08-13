@@ -152,7 +152,7 @@ const ImageCard = ({ labelKey }) => {
         showDownloadButton={showDownloadButton}
         onDownloadButtonClick={() =>
           downloadAttendance(
-            "testFile",
+            "ietdavv-sas-2023",
             document.querySelector(".text-box-input").value
           )
         }
