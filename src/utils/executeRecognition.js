@@ -11,7 +11,6 @@ import {
 
 let image;
 let canvas;
-const sortedList = [];
 
 export const executeRecognition = async (
   imageFile,
@@ -22,19 +21,15 @@ export const executeRecognition = async (
 ) => {
   const studentData = await studentDataRcvd;
 
+  image = await bufferToImage(imageFile);
+  canvas = createCanvas(image);
+
   const refWidth = dimensions.width;
   const factor = image.width / refWidth;
   const refHeight = image.height / factor;
 
   const useWidth = Math.ceil(refWidth * 0.97);
   const useHeight = Math.ceil(refHeight * 0.97);
-
-  while (sortedList.length !== 0) {
-    sortedList.pop();
-  }
-
-  image = await bufferToImage(imageFile);
-  canvas = createCanvas(image);
 
   const displaySize = {
     width: useWidth,

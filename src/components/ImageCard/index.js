@@ -4,12 +4,13 @@ import PropTypes from "prop-types";
 import { bufferToImage } from "face-api.js";
 import { executeRecognition } from "../../utils/executeRecognition";
 import { getStudentData } from "../../utils/studentData";
+import { downloadAttendance } from "../../utils/downloadAttendance";
 
+import BackDrop from "../BackDrop";
 import Button from "../Button";
 import TextBox from "../TextBox";
 
 import "./index.scss";
-import { downloadAttendance } from "../../utils/downloadAttendance";
 
 const ImageCard = ({ labelKey }) => {
   const imageFiles = [];
@@ -21,9 +22,21 @@ const ImageCard = ({ labelKey }) => {
 
   const [showImageIcon, setShowImageIcon] = useState(true);
   const [showDownloadButton, setShowDownloadButton] = useState(false);
+  const [showBackDrop, setShowBackDrop] = useState(true);
 
   useEffect(() => {
-    studentData.current = getStudentData();
+    getStudentData().then(async (value) => {
+      studentData.current = await value;
+      setShowBackDrop(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (refContainer.current) {
+      setDimensions({
+        width: refContainer.current.offsetWidth,
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -139,42 +152,46 @@ const ImageCard = ({ labelKey }) => {
 
   return (
     <>
-      <div className="image-card" ref={refContainer}>
-        <div className="images-container"></div>
+      {showBackDrop && <BackDrop />}
 
-        {showImageIcon && (
-          <>
-            <label id="input-preview-label" htmlFor="preview">
-              <i className="material-icons" id="image-icon-1">
-                image
-              </i>
-            </label>
-            <input
-              multiple
-              id={labelKey}
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, image/heic"
-              onChange={handleUploadChange}
-            />
-          </>
-        )}
+      <div className="image-container">
+        <div className="image-card" ref={refContainer}>
+          <div className="images-container"></div>
+
+          {showImageIcon && (
+            <>
+              <label id="input-preview-label" htmlFor="preview">
+                <i className="material-icons" id="image-icon-1">
+                  image
+                </i>
+              </label>
+              <input
+                multiple
+                id={labelKey}
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, image/heic"
+                onChange={handleUploadChange}
+              />
+            </>
+          )}
+        </div>
+
+        <TextBox
+          showDownloadButton={showDownloadButton}
+          onDownloadButtonClick={() =>
+            downloadAttendance(
+              "ietdavv-sas-2023",
+              document.querySelector(".text-box-input").value
+            )
+          }
+        />
+
+        <Button
+          iconType="cloud_upload"
+          labelKey="upload"
+          onClickHandler={uploadButtonClickHandler}
+        />
       </div>
-
-      <TextBox
-        showDownloadButton={showDownloadButton}
-        onDownloadButtonClick={() =>
-          downloadAttendance(
-            "ietdavv-sas-2023",
-            document.querySelector(".text-box-input").value
-          )
-        }
-      />
-
-      <Button
-        iconType="cloud_upload"
-        labelKey="upload"
-        onClickHandler={uploadButtonClickHandler}
-      />
     </>
   );
 };
