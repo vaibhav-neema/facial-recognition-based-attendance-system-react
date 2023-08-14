@@ -14,6 +14,9 @@ import { downloadAttendance } from "../../utils/downloadAttendance";
 const ImageCard = ({ labelKey }) => {
   const imageFiles = [];
   const studentData = useRef([]);
+  const refContainer = useRef();
+  const [dimensions, setDimensions] = useState({ width: 0 });
+
   let finalList = [];
 
   const [showImageIcon, setShowImageIcon] = useState(true);
@@ -21,6 +24,14 @@ const ImageCard = ({ labelKey }) => {
 
   useEffect(() => {
     studentData.current = getStudentData();
+  }, []);
+
+  useEffect(() => {
+    if (refContainer.current) {
+      setDimensions({
+        width: refContainer.current.offsetWidth,
+      });
+    }
   }, []);
 
   const addImageForFrame = async (imageFile, index) => {
@@ -77,7 +88,8 @@ const ImageCard = ({ labelKey }) => {
         imageFiles[i],
         i,
         studentData.current,
-        studentDataHashMap
+        studentDataHashMap,
+        dimensions
       );
       document
         .querySelector(`#holder${i}`)
@@ -127,7 +139,7 @@ const ImageCard = ({ labelKey }) => {
 
   return (
     <>
-      <div className="image-card">
+      <div className="image-card" ref={refContainer}>
         <div className="images-container"></div>
 
         {showImageIcon && (

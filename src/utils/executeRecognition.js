@@ -17,9 +17,17 @@ export const executeRecognition = async (
   imageFile,
   index,
   studentDataRcvd,
-  hashMap
+  hashMap,
+  dimensions
 ) => {
   const studentData = await studentDataRcvd;
+
+  const refWidth = dimensions.width;
+  const factor = image.width / refWidth;
+  const refHeight = image.height / factor;
+
+  const useWidth = Math.ceil(refWidth * 0.97);
+  const useHeight = Math.ceil(refHeight * 0.97);
 
   while (sortedList.length !== 0) {
     sortedList.pop();
@@ -29,8 +37,8 @@ export const executeRecognition = async (
   canvas = createCanvas(image);
 
   const displaySize = {
-    width: document.querySelectorAll(".frame-image")[index].width,
-    height: document.querySelectorAll(".frame-image")[index].height,
+    width: useWidth,
+    height: useHeight,
   };
   matchDimensions(canvas, displaySize);
 
