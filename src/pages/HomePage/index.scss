@@ -1,21 +1,5 @@
 body {
   margin: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
-}
-
-.image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.attendance-list {
-  padding-left: 10%;
-  display: block;
-  font-family: Geologica;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 15px;
 }

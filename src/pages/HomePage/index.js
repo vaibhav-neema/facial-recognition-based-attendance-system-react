@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { loadModels } from "../../utils/loadedModels";
 
@@ -17,12 +17,8 @@ const HomePage = () => {
   return (
     <div id="root-container">
       <AppBar />
-
       <Separator />
-
-      <div className="image-container">
-        <ImageCard labelKey="upload" />
-      </div>
+      <ImageCard labelKey="upload" />
     </div>
   );
 };
