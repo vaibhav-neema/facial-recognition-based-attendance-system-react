@@ -39,6 +39,14 @@ const ImageCard = ({ labelKey }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (refContainer.current) {
+      setDimensions({
+        width: refContainer.current.offsetWidth,
+      });
+    }
+  }, []);
+
   const addImageForFrame = async (imageFile, index) => {
     const holder = document.createElement("div");
     holder.setAttribute("id", `holder${index}`);
