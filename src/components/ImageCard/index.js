@@ -97,16 +97,8 @@ const ImageCard = ({ labelKey }) => {
     localStorage.setItem("unknown", "0");
 
     for (let i = 0; i < imageFiles.length; i++) {
-      await executeRecognition(
-        imageFiles[i],
-        i,
-        studentData.current,
-        studentDataHashMap,
-        dimensions
-      );
-      document
-        .querySelector(`#holder${i}`)
-        .removeChild(document.querySelector("#is-computing-label"));
+      await executeRecognition(imageFiles[i], i, studentData.current, studentDataHashMap, dimensions);
+      document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
     }
 
     studentDataHashMap.forEach((value, key) => {
@@ -179,18 +171,11 @@ const ImageCard = ({ labelKey }) => {
         <TextBox
           showDownloadButton={showDownloadButton}
           onDownloadButtonClick={() =>
-            downloadAttendance(
-              "ietdavv-sas-2023",
-              document.querySelector(".text-box-input").value
-            )
+            downloadAttendance("ietdavv-sas-2023", document.querySelector(".text-box-input").value)
           }
         />
 
-        <Button
-          iconType="cloud_upload"
-          labelKey="upload"
-          onClickHandler={uploadButtonClickHandler}
-        />
+        <Button iconType="cloud_upload" labelKey="upload" onClickHandler={uploadButtonClickHandler} />
       </div>
     </>
   );
