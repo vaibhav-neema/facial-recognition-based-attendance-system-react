@@ -24,14 +24,14 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
   const [showImageIcon, setShowImageIcon] = useState(true);
   const [showDownloadButton, setShowDownloadButton] = useState(false);
-  const [showBackDrop, setShowBackDrop] = useState(false);
+  const [showBackDrop, setShowBackDrop] = useState(true);
 
-  // useEffect(() => {
-  //   getStudentData().then(async (value) => {
-  //     studentData.current = await value;
-  //     setShowBackDrop(false);
-  //   });
-  // }, []);
+  useEffect(() => {
+    getStudentData().then(async (value) => {
+      studentData.current = await value;
+      setShowBackDrop(false);
+    });
+  }, []);
 
   useEffect(() => {
     if (refContainer.current) {
@@ -145,11 +145,12 @@ const ImageCard = ({ labelKey, isWeb }) => {
           "image-container-web": isWeb,
         })}
       >
-        <StickyNote 
-        title={"Output Image(s)"} 
-        width="7rem" 
-        top={isWeb ? "5.5rem" : "12.5%"} 
-        left={isWeb ? "1.5rem" : "6.5%"} /> 
+        <StickyNote
+          title={"Output Image(s)"}
+          width="7rem"
+          top={isWeb ? "5.5rem" : "12.5%"}
+          left={isWeb ? "1.5rem" : "6.5%"}
+        />
 
         <div className={!isWeb ? "image-card" : "image-card-web"} ref={refContainer}>
           <div

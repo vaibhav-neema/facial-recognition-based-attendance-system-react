@@ -31,7 +31,7 @@ const HomePage = () => {
 
   useEffect(() => {
     // load the models when homePage mounts
-    // loadModels();
+    loadModels();
   }, []);
 
   return (
