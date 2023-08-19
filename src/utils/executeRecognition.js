@@ -12,21 +12,15 @@ import {
 let image;
 let canvas;
 
-export const executeRecognition = async (
-  imageFile,
-  index,
-  studentDataRcvd,
-  hashMap,
-  dimensions
-) => {
+export const executeRecognition = async (imageFile, index, studentDataRcvd, hashMap, dimensions, isWeb) => {
   const studentData = await studentDataRcvd;
 
   image = await bufferToImage(imageFile);
   canvas = createCanvas(image);
 
-  const refWidth = dimensions.width;
-  const factor = image.width / refWidth;
-  const refHeight = image.height / factor;
+  const refWidth = isWeb ? dimensions.width / 1.91 : dimensions.width;
+  const factor = image.width / image.height;
+  const refHeight = refWidth / factor;
 
   const useWidth = Math.ceil(refWidth * 0.97);
   const useHeight = Math.ceil(refHeight * 0.97);
@@ -37,16 +31,11 @@ export const executeRecognition = async (
   };
   matchDimensions(canvas, displaySize);
 
-  const detections = await detectAllFaces(
-    image,
-    new SsdMobilenetv1Options({ minConfidence: 0.35 })
-  )
+  const detections = await detectAllFaces(image, new SsdMobilenetv1Options({ minConfidence: 0.35 }))
     .withFaceLandmarks()
     .withFaceDescriptors();
   const resizeDetections = resizeResults(detections, displaySize);
-  const results = resizeDetections.map((d) =>
-    new FaceMatcher(studentData, 0.51).findBestMatch(d.descriptor)
-  );
+  const results = resizeDetections.map((d) => new FaceMatcher(studentData, 0.51).findBestMatch(d.descriptor));
 
   let unknown = parseInt(localStorage.getItem("unknown"));
 

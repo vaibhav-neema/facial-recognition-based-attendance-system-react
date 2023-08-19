@@ -7,7 +7,7 @@ const RefreshIcon = ({ onClickHandler }) => {
   return (
     <div className="refresh-icon">
       <button onClick={onClickHandler}>
-        <i className="material-icons" id="refresh-button">
+        <i className="material-icons" id="refresh-button" style={{ cursor: "pointer" }}>
           refresh
         </i>
       </button>

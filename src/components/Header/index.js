@@ -1,57 +1,30 @@
-import * as React from "react";
+import React from "react";
+
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 
-function ResponsiveAppBar() {
+import { Box } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Geologica",
+    fontSize: 20,
+  },
+});
+
+const ResponsiveAppBar = () => {
   return (
-    <AppBar position="static" sx={{ background: "#1b5e20" }}>
-      <Container maxWidth="xl">
-        <Toolbar
-          disableGutters
-          sx={{ display: "flex", justifyContent: "space-between" }}
-        >
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            FaceIn
-          </Typography>
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            FaceIn
-          </Typography>
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <ThemeProvider theme={theme}>
+      <AppBar position="static" sx={{ background: "#1b5e20" }}>
+        <Box width={"100%"} height={"10vh"} display={"flex"} alignContent={"center"} justifyContent={"flex-start"}>
+          <Toolbar disableGutters sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography marginLeft={"1rem"}>FaceIn</Typography>
+          </Toolbar>
+        </Box>
+      </AppBar>
+    </ThemeProvider>
   );
-}
+};
 export default ResponsiveAppBar;

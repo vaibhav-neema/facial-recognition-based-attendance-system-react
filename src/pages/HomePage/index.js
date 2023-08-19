@@ -1,24 +1,43 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import { loadModels } from "../../utils/loadedModels";
 
 import AppBar from "../../components/AppBar";
 import ImageCard from "../../components/ImageCard";
-import Separator from "../../components/Separator";
 
 import "./index.scss";
 
 const HomePage = () => {
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
+
+  const updateDimensions = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    setWindowWidth(width);
+    setWindowHeight(height);
+  };
+
+  useEffect(() => {
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  });
+
+  const isMobile = () => {
+    if (windowWidth <= windowHeight / 1.5) return true;
+  };
+
   useEffect(() => {
     // load the models when homePage mounts
-    loadModels();
+    // loadModels();
   }, []);
 
   return (
     <div id="root-container">
       <AppBar />
-      <Separator />
-      <ImageCard labelKey="upload" />
+      <ImageCard labelKey="upload" isWeb={!isMobile()} />
     </div>
   );
 };
