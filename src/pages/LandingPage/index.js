@@ -33,7 +33,7 @@ const LandingPage = () => {
       Password: data.get("password"),
       Username: data.get("Username"),
     });
-    if (data.get("password") === "vneema") {
+    if (data.get("password") === process.env.REACT_APP_PASSWORD) {
       navigate("/home");
     }
   };
@@ -138,22 +138,6 @@ const LandingPage = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="Username"
-                label="Username"
-                name="Username"
-                color="success"
-                autoFocus
-              />
-              {/* <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit}
-                sx={{ mt: 1 }}
-              > */}
-              <TextField
-                margin="normal"
-                required
-                fullWidth
                 name="password"
                 label="Password"
                 type="password"
@@ -177,7 +161,6 @@ const LandingPage = () => {
           </Box>
         </Box>
       </Box>
-      {/* </Box> */}
     </ThemeProvider>
   );
 };
