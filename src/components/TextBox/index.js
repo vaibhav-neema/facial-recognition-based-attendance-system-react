@@ -3,7 +3,6 @@ import cx from "classnames";
 import PropTypes from "prop-types";
 
 import "./index.scss";
-import StickyNote from "../StickyNote";
 
 const TextBox = ({ showDownloadButton, onDownloadButtonClick, isWeb }) => {
   return (
@@ -11,8 +10,9 @@ const TextBox = ({ showDownloadButton, onDownloadButtonClick, isWeb }) => {
       className={cx("attendance-option", {
         "attendance-option-web": isWeb,
       })}
+      style={{ marginTop: isWeb ? "10px" : "2.5%" }}
     >
-      <StickyNote title={"Attendance Record"} width="8rem" top="-0.75rem" left="0.5rem" />
+      {/* <StickyNote title={"Attendance Record"} width="8rem" top={isWeb ? "-2.25%" : "-30%"} left={isWeb ? "1%" : "3%"} /> */}
 
       <textarea
         className={cx("text-box-input", {
