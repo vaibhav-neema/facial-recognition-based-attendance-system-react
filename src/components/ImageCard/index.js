@@ -12,7 +12,6 @@ import Button from "../Button";
 import TextBox from "../TextBox";
 
 import "./index.scss";
-import StickyNote from "../StickyNote";
 
 const ImageCard = ({ labelKey, isWeb }) => {
   const imageFiles = [];
@@ -139,19 +138,19 @@ const ImageCard = ({ labelKey, isWeb }) => {
           "image-container-web": isWeb,
         })}
       >
-        <StickyNote
-          title={"Output Image(s)"}
-          width="7rem"
-          top={isWeb ? "5.5rem" : "12.5%"}
-          left={isWeb ? "1.5rem" : "6.5%"}
-        />
-
         <div className={!isWeb ? "image-card" : "image-card-web"} ref={refContainer}>
           <div
             className={cx("images-container", {
               "images-container-web": isWeb,
             })}
-          ></div>
+          >
+            {/* <StickyNote
+              title={"Output Image(s)"}
+              width="7rem"
+              top={isWeb ? "-1.25rem" : "-20%"}
+              left={isWeb ? "1rem" : "0"}
+            /> */}
+          </div>
 
           {showImageIcon && (
             <>
@@ -161,8 +160,8 @@ const ImageCard = ({ labelKey, isWeb }) => {
                   id="image-icon-1"
                   style={{
                     position: "absolute",
-                    top: "45%",
-                    right: isWeb ? "43.5%" : "47%",
+                    top: isWeb ? "45%" : "32.5%",
+                    left: isWeb ? "23%" : "47%",
                     fontSize: isWeb ? "5vh" : null,
                   }}
                 >
@@ -183,14 +182,13 @@ const ImageCard = ({ labelKey, isWeb }) => {
         {isWeb ? (
           <div
             style={{
-              height: "87.5vh",
+              height: "86vh",
               width: "50%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              marginTop: "-2rem",
-              marginBottom: "-1rem",
+              marginTop: "-3.5%",
             }}
           >
             <TextBox

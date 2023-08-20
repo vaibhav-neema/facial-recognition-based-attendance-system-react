@@ -4,7 +4,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 8px;
   width: 91.75%;
 }
 
@@ -25,10 +24,11 @@
   color: rgba(46, 108, 54, 1);
   text-align: center;
   resize: none;
+  margin-top: 1.5%;
 }
 
 .text-box-input-web {
-  height: 100%;
+  height: 95%;
 }
 
 .download-button {
