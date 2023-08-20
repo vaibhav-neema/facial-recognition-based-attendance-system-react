@@ -37,19 +37,21 @@ export const executeRecognition = async (imageFile, index, studentDataRcvd, hash
   const resizeDetections = resizeResults(detections, displaySize);
   const results = resizeDetections.map((d) => new FaceMatcher(studentData, 0.51).findBestMatch(d.descriptor));
 
-  let unknown = parseInt(localStorage.getItem("unknown"));
+  const markAttendance = (name) => {
+    let num = hashMap.get(name);
+    num++;
+    hashMap.set(name, num);
+  };
 
   results.forEach((student) => {
     if (student.label !== "unknown") {
       if (hashMap.has(student.label) && hashMap.get(student.label) === 0) {
-        hashMap.set(student.label, 1);
+        markAttendance(student.label);
       }
     } else {
-      unknown++;
+      markAttendance("unknown");
     }
   });
-
-  localStorage.setItem("unknown", `${unknown}`);
 
   results.forEach((result, i) => {
     const box = resizeDetections[i].detection.box;
@@ -60,4 +62,5 @@ export const executeRecognition = async (imageFile, index, studentDataRcvd, hash
 
   canvas.style.position = "absolute";
   canvas.style.top = "0";
+  canvas.setAttribute("willUseReadFrequently", "true");
 };

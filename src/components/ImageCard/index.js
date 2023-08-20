@@ -88,8 +88,6 @@ const ImageCard = ({ labelKey, isWeb }) => {
       addImageForFrame(imageFiles[i], i);
     }
 
-    localStorage.setItem("unknown", "0");
-
     for (let i = 0; i < imageFiles.length; i++) {
       await executeRecognition(imageFiles[i], i, studentData.current, studentDataHashMap, dimensions, isWeb);
       document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
@@ -97,7 +95,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
     studentDataHashMap.forEach((value, key) => {
       detected += value;
-      if (value >= 1) {
+      if (key !== "unknown" && value >= 1) {
         finalList.push(key);
       }
     });
@@ -112,12 +110,8 @@ const ImageCard = ({ labelKey, isWeb }) => {
       textBox.value += `${i + 1}) ${element}\n`;
     });
 
-    textBox.value += `\nUnknown Students : ${localStorage.getItem("unknown")}`;
-    textBox.value += `\nTotal Students : ${
-      imageFileLength === 1
-        ? parseInt(localStorage.getItem("unknown")) + detected
-        : parseInt(localStorage.getItem("unknown")) + finalList.length
-    }`;
+    textBox.value += `\nTotal Students : ${detected}`;
+    textBox.value += `\nUnknown Students : ${studentDataHashMap.get("unknown")}`;
 
     setShowDownloadButton(true);
 
