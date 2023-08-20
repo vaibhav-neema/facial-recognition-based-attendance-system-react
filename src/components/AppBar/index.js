@@ -26,7 +26,7 @@ const AppBar = ({ title, subTitle }) => {
 };
 
 AppBar.defaultProps = {
-  title: "Smart Attendance Portal",
+  title: "FaceIn",
   subTitle: `IET-DAVV \u00A0 E&TC`,
 };
 

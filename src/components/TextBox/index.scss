@@ -8,10 +8,14 @@
   width: 91.75%;
 }
 
+.attendance-option-web {
+  height: 100%;
+}
+
 .text-box-input {
   display: block;
   align-self: center;
-  width: 100%;
+  width: 97.65%;
   padding: 3%;
   border: 2px rgba(46, 108, 54, 1) solid;
   border-radius: 1rem;
@@ -21,6 +25,10 @@
   color: rgba(46, 108, 54, 1);
   text-align: center;
   resize: none;
+}
+
+.text-box-input-web {
+  height: 100%;
 }
 
 .download-button {

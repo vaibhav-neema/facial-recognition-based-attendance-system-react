@@ -1,13 +1,18 @@
 .button {
-  width: 98%;
-  margin: 1em 1em 0.5em 1em;
+  width: 97%;
+  margin: 1em 1em 0.4em 1em;
   padding: 1em;
   background-color: rgba(46, 108, 54, 1);
   color: white;
   border: none;
   border-radius: 2em;
+  cursor: pointer;
 
   label {
     width: 100%;
   }
+}
+
+.button-web {
+  width: 93%;
 }

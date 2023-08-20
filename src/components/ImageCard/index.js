@@ -1,4 +1,5 @@
 import React, { useState, memo, useEffect, useRef } from "react";
+import cx from "classnames";
 import PropTypes from "prop-types";
 
 import { bufferToImage } from "face-api.js";
@@ -11,8 +12,9 @@ import Button from "../Button";
 import TextBox from "../TextBox";
 
 import "./index.scss";
+import StickyNote from "../StickyNote";
 
-const ImageCard = ({ labelKey }) => {
+const ImageCard = ({ labelKey, isWeb }) => {
   const imageFiles = [];
   const studentData = useRef([]);
   const refContainer = useRef();
@@ -86,24 +88,14 @@ const ImageCard = ({ labelKey }) => {
       addImageForFrame(imageFiles[i], i);
     }
 
-    localStorage.setItem("unknown", "0");
-
     for (let i = 0; i < imageFiles.length; i++) {
-      await executeRecognition(
-        imageFiles[i],
-        i,
-        studentData.current,
-        studentDataHashMap,
-        dimensions
-      );
-      document
-        .querySelector(`#holder${i}`)
-        .removeChild(document.querySelector("#is-computing-label"));
+      await executeRecognition(imageFiles[i], i, studentData.current, studentDataHashMap, dimensions, isWeb);
+      document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
     }
 
     studentDataHashMap.forEach((value, key) => {
       detected += value;
-      if (value >= 1) {
+      if (key !== "unknown" && value >= 1) {
         finalList.push(key);
       }
     });
@@ -118,12 +110,8 @@ const ImageCard = ({ labelKey }) => {
       textBox.value += `${i + 1}) ${element}\n`;
     });
 
-    textBox.value += `\nUnknown Students : ${localStorage.getItem("unknown")}`;
-    textBox.value += `\nTotal Students : ${
-      imageFileLength === 1
-        ? parseInt(localStorage.getItem("unknown")) + detected
-        : parseInt(localStorage.getItem("unknown")) + finalList.length
-    }`;
+    textBox.value += `\nTotal Students : ${detected}`;
+    textBox.value += `\nUnknown Students : ${studentDataHashMap.get("unknown")}`;
 
     setShowDownloadButton(true);
 
@@ -146,15 +134,39 @@ const ImageCard = ({ labelKey }) => {
     <>
       {showBackDrop && <BackDrop />}
 
-      <div className="image-container">
-        <div className="image-card" ref={refContainer}>
-          <div className="images-container"></div>
+      <div
+        className={cx("image-container", {
+          "image-container-web": isWeb,
+        })}
+      >
+        <StickyNote
+          title={"Output Image(s)"}
+          width="7rem"
+          top={isWeb ? "5.5rem" : "12.5%"}
+          left={isWeb ? "1.5rem" : "6.5%"}
+        />
+
+        <div className={!isWeb ? "image-card" : "image-card-web"} ref={refContainer}>
+          <div
+            className={cx("images-container", {
+              "images-container-web": isWeb,
+            })}
+          ></div>
 
           {showImageIcon && (
             <>
               <label id="input-preview-label" htmlFor="preview">
-                <i className="material-icons" id="image-icon-1">
-                  image
+                <i
+                  className="material-icons"
+                  id="image-icon-1"
+                  style={{
+                    position: "absolute",
+                    top: "45%",
+                    right: isWeb ? "43.5%" : "47%",
+                    fontSize: isWeb ? "5vh" : null,
+                  }}
+                >
+                  collections
                 </i>
               </label>
               <input
@@ -168,21 +180,41 @@ const ImageCard = ({ labelKey }) => {
           )}
         </div>
 
-        <TextBox
-          showDownloadButton={showDownloadButton}
-          onDownloadButtonClick={() =>
-            downloadAttendance(
-              "ietdavv-sas-2023",
-              document.querySelector(".text-box-input").value
-            )
-          }
-        />
+        {isWeb ? (
+          <div
+            style={{
+              height: "87.5vh",
+              width: "50%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "-2rem",
+              marginBottom: "-1rem",
+            }}
+          >
+            <TextBox
+              isWeb
+              showDownloadButton={showDownloadButton}
+              onDownloadButtonClick={() =>
+                downloadAttendance("ietdavv-sas-2023", document.querySelector(".text-box-input").value)
+              }
+            />
 
-        <Button
-          iconType="cloud_upload"
-          labelKey="upload"
-          onClickHandler={uploadButtonClickHandler}
-        />
+            <Button iconType="cloud_upload" labelKey="upload" onClickHandler={uploadButtonClickHandler} />
+          </div>
+        ) : (
+          <>
+            <TextBox
+              showDownloadButton={showDownloadButton}
+              onDownloadButtonClick={() =>
+                downloadAttendance("ietdavv-sas-2023", document.querySelector(".text-box-input").value)
+              }
+            />
+
+            <Button iconType="cloud_upload" labelKey="upload" onClickHandler={uploadButtonClickHandler} />
+          </>
+        )}
       </div>
     </>
   );
@@ -194,6 +226,7 @@ ImageCard.defaultProps = {
 
 ImageCard.propTypes = {
   labelKey: PropTypes.string,
+  isWeb: PropTypes.bool,
 };
 
 export default memo(ImageCard);
