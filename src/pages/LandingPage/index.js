@@ -32,7 +32,8 @@ export default function SignInSide() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      password: data.get("password"),
+      Password: data.get("password"),
+      Username: data.get("Username"),
     });
     if (data.get("password") == "vneema") {
       navigate("/home");
@@ -48,16 +49,15 @@ export default function SignInSide() {
             sx={{
               display: "flex",
               justifyContent: "center",
-              my: 7,
+              mt: 7,
             }}
           >
             <img src={clgLogo} />
           </Box>
           <Box
             sx={{
-              mx: 4,
+              m: 5,
               textAlign: "center",
-              p: 1,
             }}
           >
             <p>
@@ -96,16 +96,16 @@ export default function SignInSide() {
               onSubmit={handleSubmit}
               sx={{ mt: 1 }}
             >
-              {/* <TextField
+              <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="Username"
+                label="Username"
+                name="Username"
+                color="success"
                 autoFocus
-              /> */}
+              />
               <TextField
                 margin="normal"
                 required
@@ -127,12 +127,6 @@ export default function SignInSide() {
               >
                 Sign In
               </Button>
-              {/* <Grid container> */}
-
-              {/* <Grid item>
-                  <Link to="/register">{"Don't have an account? Sign Up"}</Link>
-                </Grid> */}
-              {/* </Grid> */}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
