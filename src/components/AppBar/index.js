@@ -15,7 +15,7 @@ const AppBar = ({ title, subTitle }) => {
     <div className="app-bar">
       <Logo />
 
-      <div className="content">
+      <div className="app-bar-content">
         <div className="title">{title}</div>
         <div className="sub-title">{subTitle}</div>
       </div>

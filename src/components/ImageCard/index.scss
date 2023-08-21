@@ -3,15 +3,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .image-container-web {
   position: relative;
-  height: 84vh;
+  height: 85vh;
   flex-direction: row;
   margin-left: 0.5rem;
+  margin-top: 0.5%;
 }
 
 .image-card {
@@ -20,7 +22,6 @@
   align-items: center;
   min-height: 40vh;
   width: 95%;
-  margin-bottom: 2%;
   color: rgba(46, 108, 54, 1);
   border: 2px rgba(46, 108, 54, 1) solid;
   border-radius: 1rem;
@@ -40,8 +41,6 @@
   color: rgba(46, 108, 54, 1);
   border: 2px rgba(46, 108, 54, 1) solid;
   border-radius: 1rem;
-  margin-top: -0.1%;
-  margin-bottom: 2.4%;
   overflow-y: auto;
   input {
     visibility: hidden;
@@ -65,7 +64,6 @@
 
 .images-container-web {
   position: relative;
-  margin-top: 0.75rem;
   width: 100%;
 }
 
@@ -101,4 +99,14 @@
 .image-card-web::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 100px grey;
   border-radius: 10rem;
+}
+
+.web-content {
+  height: 98.5%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
 }
