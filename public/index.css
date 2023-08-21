@@ -1,0 +1,9 @@
+html,
+body,
+#root,
+.app,
+#root-container {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

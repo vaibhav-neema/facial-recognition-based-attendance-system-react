@@ -12,6 +12,7 @@ import Button from "../Button";
 import TextBox from "../TextBox";
 
 import "./index.scss";
+import DBSelector from "../DBSelector";
 
 const ImageCard = ({ labelKey, isWeb }) => {
   const imageFiles = [];
@@ -130,7 +131,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
   };
 
   return (
-    <>
+    <div className="image-card-component">
       {showBackDrop && <BackDrop />}
 
       <div
@@ -180,17 +181,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
         </div>
 
         {isWeb ? (
-          <div
-            style={{
-              height: "86vh",
-              width: "50%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "-3.5%",
-            }}
-          >
+          <div className="web-content">
             <TextBox
               isWeb
               showDownloadButton={showDownloadButton}
@@ -198,6 +189,8 @@ const ImageCard = ({ labelKey, isWeb }) => {
                 downloadAttendance("ietdavv-sas-2023", document.querySelector(".text-box-input").value)
               }
             />
+
+            <DBSelector isWeb={isWeb} />
 
             <Button iconType="cloud_upload" labelKey="upload" onClickHandler={uploadButtonClickHandler} />
           </div>
@@ -210,11 +203,13 @@ const ImageCard = ({ labelKey, isWeb }) => {
               }
             />
 
+            <DBSelector isWeb={isWeb} />
+
             <Button iconType="cloud_upload" labelKey="upload" onClickHandler={uploadButtonClickHandler} />
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

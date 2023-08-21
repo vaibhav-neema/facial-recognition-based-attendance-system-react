@@ -5,8 +5,6 @@ import { loadModels } from "../../utils/loadedModels";
 import AppBar from "../../components/AppBar";
 import ImageCard from "../../components/ImageCard";
 
-import "./index.scss";
-
 const HomePage = () => {
   const [windowWidth, setWindowWidth] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);

@@ -10,7 +10,6 @@ const TextBox = ({ showDownloadButton, onDownloadButtonClick, isWeb }) => {
       className={cx("attendance-option", {
         "attendance-option-web": isWeb,
       })}
-      style={{ marginTop: isWeb ? "10px" : "2.5%" }}
     >
       {/* <StickyNote title={"Attendance Record"} width="8rem" top={isWeb ? "-2.25%" : "-30%"} left={isWeb ? "1%" : "3%"} /> */}
 
@@ -19,7 +18,6 @@ const TextBox = ({ showDownloadButton, onDownloadButtonClick, isWeb }) => {
           "text-box-input-web": isWeb,
         })}
         rows={isWeb ? 15 : 1}
-        ows={isWeb ? 2 : 1}
         readOnly
         placeholder="No Records"
       ></textarea>
