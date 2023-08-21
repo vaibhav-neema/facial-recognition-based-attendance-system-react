@@ -131,7 +131,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
   };
 
   return (
-    <>
+    <div className="image-card-component">
       {showBackDrop && <BackDrop />}
 
       <div
@@ -209,7 +209,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
