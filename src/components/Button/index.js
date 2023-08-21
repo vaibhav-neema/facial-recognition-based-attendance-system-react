@@ -24,6 +24,7 @@ Button.defaultProps = {
   iconType: "",
   onClickHandler: () => {},
   isWeb: false,
+  teamButtonMobile: false,
 };
 
 Button.propTypes = {
@@ -31,6 +32,7 @@ Button.propTypes = {
   iconType: PropTypes.string,
   onClickHandler: PropTypes.func,
   isWeb: PropTypes.bool,
+  teamButtonMobile: PropTypes.bool,
 };
 
 export default React.memo(Button);

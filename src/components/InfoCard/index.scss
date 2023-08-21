@@ -1,0 +1,96 @@
+.member-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  text-align: center;
+  font-family: Geologica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  width: 96%;
+  margin: 3.5% 0;
+}
+
+.image-src {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 90%;
+    border-radius: 1rem;
+  }
+}
+
+.details {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  border-left: 1px solid black;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin-left: 5%;
+}
+
+.links {
+  margin-top: 5%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+
+  :nth-child(1) {
+    margin-left: 2%;
+    img {
+      width: 30%;
+    }
+  }
+
+  :nth-child(2) {
+    margin-left: -25%;
+    img {
+      width: 60%;
+    }
+  }
+
+  :nth-child(3) {
+    margin-top: -1%;
+    img {
+      width: 50%;
+    }
+  }
+}
+
+.links-web {
+  :nth-child(1) {
+    margin-left: 2%;
+    img {
+      width: 25%;
+    }
+  }
+
+  :nth-child(2) {
+    margin-left: -40%;
+    img {
+      width: 55%;
+    }
+  }
+
+  :nth-child(3) {
+    margin-top: -1%;
+    margin-left: -10%;
+    img {
+      width: 40%;
+    }
+  }
+}
