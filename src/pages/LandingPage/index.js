@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,11 +8,11 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-
 import CopyRight from "../../components/CopyRight";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import clgLogo from "../../assets/images/davvlogo.png";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const theme = createTheme({
   typography: {
@@ -29,13 +27,22 @@ const LandingPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      Password: data.get("password"),
-      Username: data.get("Username"),
-    });
-    if (data.get("password") === process.env.REACT_APP_PASSWORD) {
-      navigate("/home");
-    }
+    const email = data.get("email");
+    const password = data.get("password");
+
+    // e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigate("/home");
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
 
   const [windowWidth, setWindowWidth] = useState(0);
@@ -134,6 +141,17 @@ const LandingPage = () => {
               onSubmit={handleSubmit}
               sx={{ mt: 1 }}
             >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                color="success"
+                autoComplete="email"
+                autoFocus
+              />
               <TextField
                 margin="normal"
                 required
