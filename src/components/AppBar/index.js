@@ -39,7 +39,7 @@ const AppBar = ({ title, subTitle }) => {
       </div>
       <div className="app-bar-icons">
         <RefreshIcon onClickHandler={reloadPage} />
-        <LogoutIcon color="white" onClick={handleLogout} />
+        <LogoutIcon onClick={handleLogout} sx={{ color: "white" }} />
       </div>
     </div>
   );
