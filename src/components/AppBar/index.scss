@@ -6,6 +6,13 @@
   padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
+.app-bar-icons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
 .app-bar-content {
   display: flex;
   flex-direction: column;
