@@ -136,7 +136,7 @@ const LandingPage = () => {
           </Box>
 
           <Box
-            height={isMobile() ? "55vh" : "90vh"}
+            height={isMobile() ? "65vh" : "90vh"}
             width={isMobile() ? "100%" : "50%"}
             component={Paper}
             elevation={6}
@@ -163,6 +163,7 @@ const LandingPage = () => {
                 noValidate
                 onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
+                width="80%"
               >
                 <TextField
                   margin="normal"
