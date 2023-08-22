@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -11,11 +10,12 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import CopyRight from "../../components/CopyRight";
-import Header from "../../components/Header";
-import TeamInfo from "../../components/TeamInfo";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import clgLogo from "../../assets/images/davvlogo.png";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import Header from "../../components/Header";
+import TeamInfo from "../../components/TeamInfo";
 import { useTeamInfo } from "../../components/TeamInfo/useTeamInfo";
 
 const theme = createTheme({
@@ -31,12 +31,21 @@ const LandingPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      password: data.get("password"),
-    });
-    if (data.get("password") === "vneema") {
-      navigate("/home");
-    }
+    const email = data.get("email");
+    const password = data.get("password");
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigate("/home");
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        alert(errorMessage);
+      });
   };
 
   const [windowWidth, setWindowWidth] = useState(0);
@@ -60,7 +69,11 @@ const LandingPage = () => {
     if (windowWidth <= windowHeight / 1.5) return true;
   };
 
-  const { isOpen: showTeamInfo, onClose: onTeamInfoClosed, onOpen: onTeamInfoOpen } = useTeamInfo();
+  const {
+    isOpen: showTeamInfo,
+    onClose: onTeamInfoClosed,
+    onOpen: onTeamInfoOpen,
+  } = useTeamInfo();
 
   const handleTeamButtonClick = () => {
     onTeamInfoOpen();
@@ -68,12 +81,21 @@ const LandingPage = () => {
 
   return (
     <>
-      <TeamInfo isOpen={showTeamInfo} onClose={onTeamInfoClosed} isWeb={!isMobile()} />
+      <TeamInfo
+        isOpen={showTeamInfo}
+        onClose={onTeamInfoClosed}
+        isWeb={!isMobile()}
+      />
 
       <Header onClickHandle={handleTeamButtonClick} />
 
       <ThemeProvider theme={theme}>
-        <Box component="main" display={"flex"} flexDirection={isMobile() ? "column" : "row"} width={"100%"}>
+        <Box
+          component="main"
+          display={"flex"}
+          flexDirection={isMobile() ? "column" : "row"}
+          width={"100%"}
+        >
           <CssBaseline />
           <Box
             width={isMobile() ? "100%" : "50%"}
@@ -99,18 +121,22 @@ const LandingPage = () => {
               }}
             >
               <p style={{ fontSize: isMobile() ? 13 : null }}>
-                FaceIn revolutionizes traditional attendance tracking by harnessing cutting-edge Facial Recognition
-                Algorithms. By extracting precise biometric data from photographs, this innovative system seamlessly
-                records classroom attendance. The captured data is then cross-referenced against a meticulously
-                maintained database, instantly confirming students' class participation. The output can be effortlessly
-                generated as a concise text file or a comprehensive Excel spreadsheet, streamlining administrative
-                tasks. Experience the future of attendance management with FaceIn.
+                FaceIn revolutionizes traditional attendance tracking by
+                harnessing cutting-edge Facial Recognition Algorithms. By
+                extracting precise biometric data from photographs, this
+                innovative system seamlessly records classroom attendance. The
+                captured data is then cross-referenced against a meticulously
+                maintained database, instantly confirming students' class
+                participation. The output can be effortlessly generated as a
+                concise text file or a comprehensive Excel spreadsheet,
+                streamlining administrative tasks. Experience the future of
+                attendance management with FaceIn.
               </p>
             </Box>
           </Box>
 
           <Box
-            height={isMobile() ? "55vh" : "90vh"}
+            height={isMobile() ? "65vh" : "90vh"}
             width={isMobile() ? "100%" : "50%"}
             component={Paper}
             elevation={6}
@@ -132,7 +158,24 @@ const LandingPage = () => {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 1 }}
+                width="80%"
+              >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  color="success"
+                  autoComplete="email"
+                  autoFocus
+                />
                 <TextField
                   margin="normal"
                   required
@@ -145,7 +188,13 @@ const LandingPage = () => {
                   autoComplete="current-password"
                 />
 
-                <Button type="submit" fullWidth variant="contained" color="success" sx={{ mt: 3, mb: 2 }}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="success"
+                  sx={{ mt: 3, mb: 2 }}
+                >
                   Sign In
                 </Button>
 
