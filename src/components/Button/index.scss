@@ -1,5 +1,5 @@
 .button {
-  width: 97%;
+  width: 46%;
   margin: 2% 1em 0 1em;
   padding: 1em;
   background-color: rgba(46, 108, 54, 1);
@@ -14,5 +14,9 @@
 }
 
 .button-web {
-  width: 93%;
+  width: 46%;
+}
+
+.disabled {
+  background-color: gray;
 }
