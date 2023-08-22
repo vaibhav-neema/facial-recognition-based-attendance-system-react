@@ -132,6 +132,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
     const textBox = document.querySelector(".text-box-input");
     textBox.value = "";
+    textBox.style.color = "rgba(46, 108, 54, 1)";
     textBox.style.textAlign = "left";
     textBox.removeAttribute("readonly");
     textBox.setAttribute("rows", finalList.length + 3);
@@ -204,8 +205,6 @@ const ImageCard = ({ labelKey, isWeb }) => {
     event.preventDefault();
     const fetchedStudentData = await studentData.current;
     filteredData.current = filterData(newBatch, newBranch, newSection, fetchedStudentData);
-
-    console.log(filteredData.current);
 
     if (filteredData.current.length === 0) {
       const textBox = document.querySelector(".text-box-input");

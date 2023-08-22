@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import cx from "classnames";
 
 import InfoCard from "../InfoCard";
-import { useTeamInfo } from "./useTeamInfo";
 import antriksh from "../../assets/images/Team/AntrikshTyagi.jpg";
 import divyanshu from "../../assets/images/Team/DivyanshuParwal.jpg";
 import shubh from "../../assets/images/Team/ShubhLaad.jpg";
