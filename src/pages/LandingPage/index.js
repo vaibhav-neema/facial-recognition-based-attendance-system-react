@@ -69,11 +69,7 @@ const LandingPage = () => {
     if (windowWidth <= windowHeight / 1.5) return true;
   };
 
-  const {
-    isOpen: showTeamInfo,
-    onClose: onTeamInfoClosed,
-    onOpen: onTeamInfoOpen,
-  } = useTeamInfo();
+  const { isOpen: showTeamInfo, onClose: onTeamInfoClosed, onOpen: onTeamInfoOpen } = useTeamInfo();
 
   const handleTeamButtonClick = () => {
     onTeamInfoOpen();
@@ -81,21 +77,12 @@ const LandingPage = () => {
 
   return (
     <>
-      <TeamInfo
-        isOpen={showTeamInfo}
-        onClose={onTeamInfoClosed}
-        isWeb={!isMobile()}
-      />
+      <TeamInfo isOpen={showTeamInfo} onClose={onTeamInfoClosed} isWeb={!isMobile()} />
 
       <Header onClickHandle={handleTeamButtonClick} />
 
       <ThemeProvider theme={theme}>
-        <Box
-          component="main"
-          display={"flex"}
-          flexDirection={isMobile() ? "column" : "row"}
-          width={"100%"}
-        >
+        <Box component="main" display={"flex"} flexDirection={isMobile() ? "column" : "row"} width={"100%"}>
           <CssBaseline />
           <Box
             width={isMobile() ? "100%" : "50%"}
@@ -121,16 +108,12 @@ const LandingPage = () => {
               }}
             >
               <p style={{ fontSize: isMobile() ? 13 : null }}>
-                FaceIn revolutionizes traditional attendance tracking by
-                harnessing cutting-edge Facial Recognition Algorithms. By
-                extracting precise biometric data from photographs, this
-                innovative system seamlessly records classroom attendance. The
-                captured data is then cross-referenced against a meticulously
-                maintained database, instantly confirming students' class
-                participation. The output can be effortlessly generated as a
-                concise text file or a comprehensive Excel spreadsheet,
-                streamlining administrative tasks. Experience the future of
-                attendance management with FaceIn.
+                FaceIn revolutionizes traditional attendance tracking by harnessing cutting-edge Facial Recognition
+                Algorithms. By extracting precise biometric data from photographs, this innovative system seamlessly
+                records classroom attendance. The captured data is then cross-referenced against a meticulously
+                maintained database, instantly confirming students' class participation. The output can be effortlessly
+                generated as a concise text file or a comprehensive Excel spreadsheet, streamlining administrative
+                tasks. Experience the future of attendance management with FaceIn.
               </p>
             </Box>
           </Box>
@@ -158,13 +141,7 @@ const LandingPage = () => {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-              <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit}
-                sx={{ mt: 1 }}
-                width="80%"
-              >
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }} width="80%">
                 <TextField
                   margin="normal"
                   required
@@ -188,13 +165,7 @@ const LandingPage = () => {
                   autoComplete="current-password"
                 />
 
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="success"
-                  sx={{ mt: 3, mb: 2 }}
-                >
+                <Button type="submit" fullWidth variant="contained" color="success" sx={{ mt: 3, mb: 2 }}>
                   Sign In
                 </Button>
 

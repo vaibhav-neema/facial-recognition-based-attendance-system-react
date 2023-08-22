@@ -4,18 +4,18 @@ import PropTypes from "prop-types";
 
 import { bufferToImage } from "face-api.js";
 import { executeRecognition } from "../../utils/executeRecognition";
-import { getStudentData } from "../../utils/studentData";
 import { downloadAttendance } from "../../utils/downloadAttendance";
+import { getStudentDespData, filterData } from "../../utils/fetchData";
 
-import BackDrop from "../BackDrop";
 import Button from "../Button";
 import TextBox from "../TextBox";
+import BackDrop from "../BackDrop";
 
 import "./index.scss";
-import DBSelector from "../DBSelector";
 
 const ImageCard = ({ labelKey, isWeb }) => {
   const imageFiles = [];
+  let filteredData = useRef([]);
   const studentData = useRef([]);
   const refContainer = useRef();
   const [dimensions, setDimensions] = useState({ width: 0 });
@@ -24,10 +24,19 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
   const [showImageIcon, setShowImageIcon] = useState(true);
   const [showDownloadButton, setShowDownloadButton] = useState(false);
-  const [showBackDrop, setShowBackDrop] = useState(true);
+  const [showBackDrop, setShowBackDrop] = useState(false);
+  const [disableDBButtonState, setDisableDBButtonState] = useState(false);
+  const [disableUploadButtonState, setDisableUploadButtonState] = useState(false);
+  const [sectionB, setSectionB] = useState(true);
+
+  const [newBatch, setNewBatch] = useState("");
+  const [newBranch, setNewBranch] = useState("");
+  const [newSection, setNewSection] = useState("");
 
   useEffect(() => {
-    getStudentData().then(async (value) => {
+    setDisableUploadButtonState(true);
+    setShowBackDrop(true);
+    getStudentDespData().then(async (value) => {
       studentData.current = await value;
       setShowBackDrop(false);
     });
@@ -40,6 +49,28 @@ const ImageCard = ({ labelKey, isWeb }) => {
       });
     }
   }, []);
+
+  const [selectedData, setSelectedBatch] = useState({
+    batch: "",
+    branch: "",
+    section: "",
+  });
+
+  useEffect(() => {
+    if (newBatch === "" || newBranch === "" || newSection === "") {
+      setDisableDBButtonState(true);
+      setDisableUploadButtonState(true);
+    } else if (
+      selectedData.batch !== newBatch &&
+      selectedData.branch !== newBranch &&
+      selectedData.section !== newSection
+    ) {
+      setDisableDBButtonState(false);
+      setDisableUploadButtonState(false);
+    } else {
+      setDisableDBButtonState(false);
+    }
+  }, [newBatch, newBranch, newSection]);
 
   const addImageForFrame = async (imageFile, index) => {
     const holder = document.createElement("div");
@@ -69,13 +100,12 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
     setShowImageIcon(false);
 
-    const studentDataFetch = await studentData.current;
     let studentDataHashMap = new Map();
     const imageFileLength = event.target.files.length;
     let detected = 0;
 
-    for (let i = 0; i < studentDataFetch.length; i++) {
-      studentDataHashMap.set(studentDataFetch[i]._label, 0);
+    for (let i = 0; i < filteredData.current.length; i++) {
+      studentDataHashMap.set(filteredData.current[i]._label, 0);
     }
 
     studentDataHashMap.set("unknown", 0);
@@ -89,7 +119,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
     }
 
     for (let i = 0; i < imageFiles.length; i++) {
-      await executeRecognition(imageFiles[i], i, studentData.current, studentDataHashMap, dimensions, isWeb);
+      await executeRecognition(imageFiles[i], i, filteredData.current, studentDataHashMap, dimensions, isWeb);
       document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
     }
 
@@ -130,32 +160,84 @@ const ImageCard = ({ labelKey, isWeb }) => {
     setShowImageIcon(true);
   };
 
+  const getBatchValue = (event) => {
+    const value = event.target.value;
+
+    setNewBatch(value);
+    setSelectedBatch({
+      ...selectedData,
+      batch: value,
+    });
+  };
+
+  const getBranchValue = (event) => {
+    const value = event.target.value;
+
+    setNewBranch(value);
+    setSelectedBatch({
+      ...selectedData,
+      branch: value,
+    });
+
+    if (value === "EI" || value === "MECH" || value === "CIVIL") {
+      setSectionB(false);
+      document.getElementById("student-section").setAttribute("value", "");
+      setNewSection("");
+    }
+
+    if (value === "ETC" || value === "CS" || value === "IT") {
+      setSectionB(true);
+    }
+  };
+
+  const getSectionValue = (event) => {
+    const value = event.target.value;
+
+    setNewSection(event.target.value);
+    setSelectedBatch({
+      ...selectedData,
+      section: value,
+    });
+  };
+
+  const getFilteredData = async (event) => {
+    event.preventDefault();
+    const fetchedStudentData = await studentData.current;
+    filteredData.current = filterData(newBatch, newBranch, newSection, fetchedStudentData);
+
+    console.log(filteredData.current);
+
+    if (filteredData.current.length === 0) {
+      const textBox = document.querySelector(".text-box-input");
+      textBox.value = "Currently No Data For Filters Applied !";
+      textBox.removeAttribute("readonly");
+      textBox.style.color = "red";
+    } else {
+      setDisableDBButtonState(true);
+      setDisableUploadButtonState(false);
+      uploadButtonClickHandler();
+    }
+  };
+
   return (
-    <div className="image-card-component">
+    <>
       {showBackDrop && <BackDrop />}
 
-      <div
-        className={cx("image-container", {
-          "image-container-web": isWeb,
-        })}
-      >
-        <div className={!isWeb ? "image-card" : "image-card-web"} ref={refContainer}>
-          <div
-            className={cx("images-container", {
-              "images-container-web": isWeb,
-            })}
-          >
-            {/* <StickyNote
-              title={"Output Image(s)"}
-              width="7rem"
-              top={isWeb ? "-1.25rem" : "-20%"}
-              left={isWeb ? "1rem" : "0"}
-            /> */}
-          </div>
+      <div className="image-card-component">
+        <div
+          className={cx("image-container", {
+            "image-container-web": isWeb,
+          })}
+        >
+          <div className={!isWeb ? "image-card" : "image-card-web"} ref={refContainer}>
+            <div
+              className={cx("images-container", {
+                "images-container-web": isWeb,
+              })}
+            ></div>
 
-          {showImageIcon && (
-            <>
-              <label id="input-preview-label" htmlFor="preview">
+            {showImageIcon && (
+              <>
                 <i
                   className="material-icons"
                   id="image-icon-1"
@@ -168,48 +250,140 @@ const ImageCard = ({ labelKey, isWeb }) => {
                 >
                   collections
                 </i>
-              </label>
-              <input
-                multiple
-                id={labelKey}
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, image/heic"
-                onChange={handleUploadChange}
+
+                <input
+                  multiple
+                  id={labelKey}
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, image/heic"
+                  onChange={handleUploadChange}
+                  disabled={disableUploadButtonState}
+                />
+              </>
+            )}
+          </div>
+
+          {isWeb ? (
+            <div className="web-content">
+              <TextBox
+                isWeb
+                showDownloadButton={showDownloadButton}
+                onDownloadButtonClick={() =>
+                  downloadAttendance(
+                    newBatch,
+                    newBranch,
+                    newSection,
+                    "ietdavv-sas-2023",
+                    document.querySelector(".text-box-input").value
+                  )
+                }
               />
+
+              <div
+                className={cx("db-selector", {
+                  "db-selector-web": isWeb,
+                })}
+              >
+                <div className="capsules">
+                  <form onSubmit={getFilteredData}>
+                    <input type="submit" />
+                    <select name="Batch" onChange={getBatchValue} defaultValue={""}>
+                      <option value="">Batch</option>
+                      <option value="b23">2023</option>
+                      <option value="b24">2024</option>
+                      <option value="b25">2025</option>
+                    </select>
+                    <select name="Branch" onChange={getBranchValue} defaultValue={""}>
+                      <option value="">Branch</option>
+                      <option value="CS">CS</option>
+                      <option value="IT">IT</option>
+                      <option value="ETC">ETC</option>
+                      <option value="EI">EI</option>
+                      <option value="MECH">Mech</option>
+                      <option value="CIVIL">Civil</option>
+                    </select>
+                    <select id="student-section" name="Section" onChange={getSectionValue} defaultValue={""}>
+                      <option value="">Section</option>
+                      <option value="A">A</option>
+                      {sectionB && <option value="B">B</option>}
+                    </select>
+                    <input type="submit" id="dbInput" disabled={disableDBButtonState} />
+                  </form>
+                </div>
+              </div>
+
+              <div className="buttons">
+                <Button
+                  iconType="cloud_upload"
+                  labelKey="upload"
+                  onClickHandler={uploadButtonClickHandler}
+                  isDisabled={disableUploadButtonState}
+                />
+                <Button iconType="database" labelKey="dbInput" isDatabase={true} isDisabled={disableDBButtonState} />
+              </div>
+            </div>
+          ) : (
+            <>
+              <TextBox
+                showDownloadButton={showDownloadButton}
+                onDownloadButtonClick={() =>
+                  downloadAttendance(
+                    newBatch,
+                    newBranch,
+                    newSection,
+                    "ietdavv-sas-2023",
+                    document.querySelector(".text-box-input").value
+                  )
+                }
+              />
+
+              <div
+                className={cx("db-selector", {
+                  "db-selector-web": isWeb,
+                })}
+              >
+                <div className="capsules">
+                  <form onSubmit={getFilteredData}>
+                    <input type="submit" />
+                    <select name="Batch" onChange={getBatchValue} defaultValue={""}>
+                      <option value="">Batch</option>
+                      <option value="b23">2023</option>
+                      <option value="b24">2024</option>
+                      <option value="b25">2025</option>
+                    </select>
+                    <select name="Branch" onChange={getBranchValue} defaultValue={""}>
+                      <option value="">Branch</option>
+                      <option value="CS">CS</option>
+                      <option value="IT">IT</option>
+                      <option value="ETC">ETC</option>
+                      <option value="EI">EI</option>
+                      <option value="MECH">Mech</option>
+                      <option value="CIVIL">Civil</option>
+                    </select>
+                    <select id="student-section" name="Section" onChange={getSectionValue} defaultValue={""}>
+                      <option value="">Section</option>
+                      <option value="A">A</option>
+                      {sectionB && <option value="B">B</option>}
+                    </select>
+                    <input type="submit" id="dbInput" disabled={disableDBButtonState} />
+                  </form>
+                </div>
+              </div>
+
+              <div className="buttons">
+                <Button
+                  iconType="cloud_upload"
+                  labelKey="upload"
+                  onClickHandler={uploadButtonClickHandler}
+                  isDisabled={disableUploadButtonState}
+                />
+                <Button iconType="database" labelKey="dbInput" isDatabase={true} isDisabled={disableDBButtonState} />
+              </div>
             </>
           )}
         </div>
-
-        {isWeb ? (
-          <div className="web-content">
-            <TextBox
-              isWeb
-              showDownloadButton={showDownloadButton}
-              onDownloadButtonClick={() =>
-                downloadAttendance("ietdavv-sas-2023", document.querySelector(".text-box-input").value)
-              }
-            />
-
-            <DBSelector isWeb={isWeb} />
-
-            <Button iconType="cloud_upload" labelKey="upload" onClickHandler={uploadButtonClickHandler} />
-          </div>
-        ) : (
-          <>
-            <TextBox
-              showDownloadButton={showDownloadButton}
-              onDownloadButtonClick={() =>
-                downloadAttendance("ietdavv-sas-2023", document.querySelector(".text-box-input").value)
-              }
-            />
-
-            <DBSelector isWeb={isWeb} />
-
-            <Button iconType="cloud_upload" labelKey="upload" onClickHandler={uploadButtonClickHandler} />
-          </>
-        )}
       </div>
-    </div>
+    </>
   );
 };
 

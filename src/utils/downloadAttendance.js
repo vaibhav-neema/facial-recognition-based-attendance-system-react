@@ -1,9 +1,9 @@
-export const downloadAttendance = (name, content) => {
+export const downloadAttendance = (batch, branch, section, name, content) => {
   let date = new Date(Date.now()).toLocaleString(undefined, {
     timeZone: "Asia/Kolkata",
   });
 
-  const fileName = name + "_" + date.replace(", ", "_");
+  const fileName = name + "_" + batch + "_" + branch + "_" + section + "_" + date.replace(", ", "_");
 
   const element = document.createElement("a");
 

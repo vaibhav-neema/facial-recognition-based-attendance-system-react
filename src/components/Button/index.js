@@ -4,15 +4,23 @@ import PropTypes from "prop-types";
 
 import "./index.scss";
 
-const Button = ({ labelKey, iconType, onClickHandler, isWeb }) => {
+const Button = ({ labelKey, iconType, onClickHandler, isWeb, isDatabase, isDisabled }) => {
   return (
     <button
       className={cx("button", {
         "button-web": isWeb,
+        disabled: isDisabled,
       })}
       onClick={onClickHandler}
+      disabled={isDisabled}
     >
-      <label htmlFor={labelKey} className="material-icons" style={{ cursor: "pointer" }}>
+      <label
+        htmlFor={labelKey}
+        className={cx("material-icons", {
+          "material-symbols-rounded": isDatabase,
+        })}
+        style={{ cursor: "pointer" }}
+      >
         {iconType}
       </label>
     </button>
@@ -25,6 +33,7 @@ Button.defaultProps = {
   onClickHandler: () => {},
   isWeb: false,
   teamButtonMobile: false,
+  isDatabase: false,
 };
 
 Button.propTypes = {
@@ -33,6 +42,7 @@ Button.propTypes = {
   onClickHandler: PropTypes.func,
   isWeb: PropTypes.bool,
   teamButtonMobile: PropTypes.bool,
+  isDatabase: PropTypes.bool,
 };
 
 export default React.memo(Button);

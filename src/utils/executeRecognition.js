@@ -13,7 +13,8 @@ let image;
 let canvas;
 
 export const executeRecognition = async (imageFile, index, studentDataRcvd, hashMap, dimensions, isWeb) => {
-  const studentData = await studentDataRcvd;
+  const studentData = studentDataRcvd;
+  console.log("exeRec", studentData);
 
   image = await bufferToImage(imageFile);
   canvas = createCanvas(image);
