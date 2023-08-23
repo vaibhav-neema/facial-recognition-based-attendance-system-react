@@ -317,7 +317,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
                 </div>
               </div>
 
-              <div className="buttons">
+              <div className="buttons-web">
                 <Button
                   iconType="cloud_upload"
                   labelKey="upload"

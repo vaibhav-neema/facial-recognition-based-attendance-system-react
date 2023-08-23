@@ -35,6 +35,7 @@
   border: 2px rgba(46, 108, 54, 1) solid;
   border-radius: 1rem;
   padding-top: 1rem;
+  overflow-y: auto;
 
   input {
     visibility: hidden;
@@ -122,6 +123,14 @@
 }
 
 .buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2%;
+}
+
+.buttons-web {
   width: 100%;
   display: flex;
   align-items: center;
