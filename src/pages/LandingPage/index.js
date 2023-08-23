@@ -16,6 +16,8 @@ import { auth } from "../../firebase";
 import Header from "../../components/Header";
 import TeamInfo from "../../components/TeamInfo";
 import { useTeamInfo } from "../../components/TeamInfo/useTeamInfo";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const theme = createTheme({
   typography: {
@@ -35,19 +37,34 @@ const LandingPage = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         // Signed in
-        // const user = userCredential.user;
         navigate("/home");
         sessionStorage.setItem(
           "Auth Token",
           response._tokenResponse.refreshToken
         );
-        // console.log(user);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        alert(errorMessage);
+        console.log(error.message);
+        if (error.code === "auth/wrong-password") {
+          toast.error("Please enter correct Password", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        if (error.code === "auth/user-not-found") {
+          toast.error("Please enter correct Email", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        if (error.code === "auth/missing-password") {
+          toast.error("Please enter the Password", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        if (error.code === "auth/invalid-email") {
+          toast.error("Email provided is invalid", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
       });
   };
 
@@ -91,7 +108,7 @@ const LandingPage = () => {
       />
 
       <Header onClickHandle={handleTeamButtonClick} />
-
+      <ToastContainer />
       <ThemeProvider theme={theme}>
         <Box
           component="main"
