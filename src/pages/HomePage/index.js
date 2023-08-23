@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { loadModels } from "../../utils/loadedModels";
 
@@ -16,6 +17,19 @@ const HomePage = () => {
     setWindowWidth(width);
     setWindowHeight(height);
   };
+
+  let navigate = useNavigate();
+  useEffect(() => {
+    let authToken = sessionStorage.getItem("Auth Token");
+
+    if (authToken) {
+      navigate("/home");
+    }
+
+    if (!authToken) {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     updateDimensions();
