@@ -1,0 +1,43 @@
+[debug] [2023-08-23T12:19:51.957Z] ----------------------------------------------------------------------
+[debug] [2023-08-23T12:19:51.959Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy -P sas-testing-48af8
+[debug] [2023-08-23T12:19:51.960Z] CLI Version:   9.20.0
+[debug] [2023-08-23T12:19:51.960Z] Platform:      win32
+[debug] [2023-08-23T12:19:51.960Z] Node Version:  v16.13.1
+[debug] [2023-08-23T12:19:51.969Z] Time:          Wed Aug 23 2023 17:49:51 GMT+0530 (India Standard Time)
+[debug] [2023-08-23T12:19:51.970Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-23T12:19:51.990Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-08-23T12:19:52.166Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-23T12:19:52.166Z] > authorizing via signed-in user (divyanshuparwal2001@gmail.com)
+[debug] [2023-08-23T12:19:52.167Z] [iam] checking project sas-testing-48af8 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-23T12:19:52.170Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2023-08-23T12:19:52.171Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2023-08-23T12:19:52.450Z] <<< HTTP RESPONSE 400 {"date":"Wed, 23 Aug 2023 12:19:53 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2023-08-23T12:19:52.452Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sas-testing-48af8:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-23T12:19:53.108Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-08-23T12:19:53.108Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2023-08-23T12:19:53.134Z] <<< HTTP RESPONSE 401 {"www-authenticate":"Bearer realm=\"https://accounts.google.com/\", error=\"invalid_token\"","vary":"X-Origin, Referer, Origin,Accept-Encoding","content-type":"application/json; charset=UTF-8","date":"Wed, 23 Aug 2023 12:19:53 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=251","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2023-08-23T12:19:53.134Z] <<< HTTP RESPONSE BODY {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"method":"google.cloudresourcemanager.v1.Projects.TestIamPermissions","service":"cloudresourcemanager.googleapis.com"}}]}}
+[debug] [2023-08-23T12:19:53.135Z] [iam] error while checking permissions, command may fail: FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2023-08-23T12:19:53.136Z] > refreshing access token with scopes: []
+[debug] [2023-08-23T12:19:53.136Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2023-08-23T12:19:53.370Z] <<< HTTP RESPONSE 400 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Wed, 23 Aug 2023 12:19:54 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2023-08-23T12:19:53.371Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sas-testing-48af8 [none]
+[debug] [2023-08-23T12:19:53.691Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sas-testing-48af8 401
+[debug] [2023-08-23T12:19:53.692Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sas-testing-48af8 {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2023-08-23T12:19:53.692Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2023-08-23T12:19:53.695Z] FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at module.exports (C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:38:12)
+    at Client.doRequest (C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:238:23)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Client.request (C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:96:20)
+    at async Object.getFirebaseProject (C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:290:21)
+    at async Object.getDefaultHostingSite (C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\getDefaultHostingSite.js:8:21)
+    at async requireHostingSite (C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\requireHostingSite.js:9:18)
+    at async Object.fn (C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\deploy.js:65:9)
+    at async C:\Users\Divyanshu Parwal\AppData\Roaming\npm\node_modules\firebase-tools\lib\command.js:188:17
+[error] 
+[error] Error: Failed to get Firebase project sas-testing-48af8. Please make sure the project exists and your account has permission to access it.
