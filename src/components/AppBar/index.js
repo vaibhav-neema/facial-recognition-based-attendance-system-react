@@ -16,6 +16,7 @@ const AppBar = ({ title, subTitle }) => {
       .then(() => {
         // Sign-out successful.
         navigate("/");
+        sessionStorage.removeItem("Auth Token");
         console.log("Signed out successfully");
       })
       .catch((error) => {
