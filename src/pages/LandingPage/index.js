@@ -130,7 +130,7 @@ const LandingPage = () => {
                 records classroom attendance. The captured data is then cross-referenced against a meticulously
                 maintained database, instantly confirming students' class participation. The output can be effortlessly
                 generated as a concise text file or a comprehensive Excel spreadsheet, streamlining administrative
-                tasks. Experience the future of attendance management with FaceIn.
+                tasks. Experience the future of attendance management with AttendEase.
               </p>
             </Box>
           </Box>
