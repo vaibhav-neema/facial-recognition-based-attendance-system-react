@@ -1,0 +1,54 @@
+.loader {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  margin-top: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  margin: 0 0.15rem 0 0.15rem;
+  background-color: rgba(46, 108, 54, 1);
+  border-radius: 50%;
+}
+
+.loader .dot:nth-last-child(1) {
+  animation: shader 0.85s 0.8s ease-in infinite;
+}
+.loader .dot:nth-last-child(2) {
+  animation: shader 0.85s 0.7s ease-in infinite;
+}
+.loader .dot:nth-last-child(3) {
+  animation: shader 0.85s 0.6s ease-in infinite;
+}
+.loader .dot:nth-last-child(4) {
+  animation: shader 0.85s 0.5s ease-in infinite;
+}
+.loader .dot:nth-last-child(5) {
+  animation: shader 0.85s 0.4s ease-in infinite;
+}
+.loader .dot:nth-last-child(6) {
+  animation: shader 0.85s 0.3s ease-in infinite;
+}
+.loader .dot:nth-last-child(7) {
+  animation: shader 0.85s 0.2s ease-in infinite;
+}
+.loader .dot:nth-last-child(8) {
+  animation: shader 0.85s 0.1s ease-in infinite;
+}
+
+@keyframes shader {
+  20% {
+    background-color: white;
+  }
+  60% {
+    width: 0.4rem;
+    height: 0.4rem;
+    background-color: white;
+  }
+  100% {
+    background-color: white;
+  }
+}

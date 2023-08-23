@@ -1,0 +1,76 @@
+.team-info {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.show-modal {
+  display: none;
+}
+
+.heading {
+  width: 100%;
+  font-size: 25px;
+  padding: 2% 0;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+
+.info-sheet {
+  z-index: 101;
+  position: fixed;
+  top: 15%;
+  width: 80%;
+  height: 70%;
+  background-color: white;
+  border-radius: 1rem;
+  overflow-y: auto;
+}
+
+.info-sheet-web {
+  top: 10%;
+  width: 40%;
+  height: 80%;
+  z-index: 101;
+}
+
+.developers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.separator {
+  width: 100%;
+  border-bottom: 2px solid black;
+}
+
+.info-sheet-web::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.info-sheet-web::-webkit-scrollbar-track {
+  margin: 10px 0;
+}
+
+.info-sheet-web::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 100px grey;
+  border-radius: 10rem;
+}

@@ -1,0 +1,22 @@
+.button {
+  width: 46%;
+  margin: 2% 1em 0 1em;
+  padding: 1em;
+  background-color: rgba(46, 108, 54, 1);
+  color: white;
+  border: none;
+  border-radius: 2em;
+  cursor: pointer;
+
+  label {
+    width: 100%;
+  }
+}
+
+.button-web {
+  width: 46%;
+}
+
+.disabled {
+  background-color: gray;
+}
