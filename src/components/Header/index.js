@@ -28,7 +28,7 @@ const ResponsiveAppBar = ({ onClickHandle }) => {
               justifyContent: "space-between",
             }}
           >
-            <Typography marginLeft={"1rem"}>AllIn</Typography>
+            <Typography marginLeft={"1rem"}>AttendEase</Typography>
 
             <button
               style={{
