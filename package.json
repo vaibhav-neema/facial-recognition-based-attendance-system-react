@@ -1,5 +1,6 @@
 {
-  "name": "patent-web-app",
+  "name": "attend-ease",
+  "description": "A System and Method for Taking Attendance in Educational and Professional Settings",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

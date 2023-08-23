@@ -242,8 +242,8 @@ const ImageCard = ({ labelKey, isWeb }) => {
                   id="image-icon-1"
                   style={{
                     position: "absolute",
-                    top: isWeb ? "45%" : "32.5%",
-                    left: isWeb ? "23%" : "47%",
+                    top: isWeb ? "45%" : "28vh",
+                    left: isWeb ? "24%" : "47.5%",
                     fontSize: isWeb ? "5vh" : null,
                   }}
                 >
@@ -286,13 +286,13 @@ const ImageCard = ({ labelKey, isWeb }) => {
                 <div className="capsules">
                   <form onSubmit={getFilteredData}>
                     <input type="submit" />
-                    <select name="Batch" onChange={getBatchValue} defaultValue={""}>
+                    <select name="Batch" onChange={getBatchValue} defaultValue={""} style={{ cursor: "pointer" }}>
                       <option value="">Batch</option>
                       <option value="b23">2023</option>
                       <option value="b24">2024</option>
                       <option value="b25">2025</option>
                     </select>
-                    <select name="Branch" onChange={getBranchValue} defaultValue={""}>
+                    <select name="Branch" onChange={getBranchValue} defaultValue={""} style={{ cursor: "pointer" }}>
                       <option value="">Branch</option>
                       <option value="CS">CS</option>
                       <option value="IT">IT</option>
@@ -301,7 +301,13 @@ const ImageCard = ({ labelKey, isWeb }) => {
                       <option value="MECH">Mech</option>
                       <option value="CIVIL">Civil</option>
                     </select>
-                    <select id="student-section" name="Section" onChange={getSectionValue} defaultValue={""}>
+                    <select
+                      id="student-section"
+                      name="Section"
+                      onChange={getSectionValue}
+                      defaultValue={""}
+                      style={{ cursor: "pointer" }}
+                    >
                       <option value="">Section</option>
                       <option value="A">A</option>
                       {sectionB && <option value="B">B</option>}

@@ -18,12 +18,7 @@ const ResponsiveAppBar = ({ onClickHandle }) => {
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static" sx={{ background: "#1b5e20" }}>
-        <Box
-          width={"100%"}
-          height={"10vh"}
-          display={"flex"}
-          alignContent={"center"}
-        >
+        <Box width={"100%"} height={"10vh"} display={"flex"} alignContent={"center"}>
           <Toolbar
             disableGutters
             sx={{
@@ -41,6 +36,7 @@ const ResponsiveAppBar = ({ onClickHandle }) => {
                 border: 0,
                 color: "white",
                 marginRight: "1.5%",
+                cursor: "pointer",
               }}
               onClick={onClickHandle}
             >

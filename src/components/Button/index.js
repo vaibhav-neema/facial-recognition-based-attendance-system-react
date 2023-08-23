@@ -7,8 +7,7 @@ import "./index.scss";
 const Button = ({ labelKey, iconType, onClickHandler, isWeb, isDatabase, isDisabled }) => {
   return (
     <button
-      className={cx("button", {
-        "button-web": isWeb,
+      className={cx(isWeb ? "button-web" : "button", {
         disabled: isDisabled,
       })}
       onClick={onClickHandler}

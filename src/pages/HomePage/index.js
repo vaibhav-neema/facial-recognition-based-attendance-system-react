@@ -48,7 +48,7 @@ const HomePage = () => {
 
   return (
     <div id="root-container">
-      <AppBar />
+      <AppBar isWeb={!isMobile()} />
       <ImageCard labelKey="upload" isWeb={!isMobile()} />
     </div>
   );
