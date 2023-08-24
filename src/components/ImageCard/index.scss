@@ -32,7 +32,7 @@
   height: 55vh;
   width: 95%;
   color: rgba(46, 108, 54, 1);
-  border: 2px rgba(46, 108, 54, 1) solid;
+  border: 2px #1b5e20 solid;
   border-radius: 1rem;
   padding-top: 1rem;
   overflow-y: auto;
@@ -50,7 +50,7 @@
   width: 51%;
   margin-left: 1%;
   color: rgba(46, 108, 54, 1);
-  border: 2px rgba(46, 108, 54, 1) solid;
+  border: 2px #1b5e20 solid;
   border-radius: 1rem;
   overflow-y: auto;
   input {
@@ -140,7 +140,7 @@
 .db-selector {
   width: 95%;
   color: rgba(46, 108, 54, 1);
-  border: 2px rgba(46, 108, 54, 1) solid;
+  border: 2px #1b5e20 solid;
   border-radius: 1rem;
   margin-top: 2%;
 }
@@ -168,7 +168,7 @@
 
   select {
     background-color: white;
-    border: 2px solid rgba(46, 108, 54, 1);
+    border: 2px solid #1b5e20;
     border-radius: 1rem;
     width: 30%;
     margin: 2% 0;

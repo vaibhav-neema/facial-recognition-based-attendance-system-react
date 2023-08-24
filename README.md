@@ -54,9 +54,9 @@
 
 - Database Management & Documentation
 
-* Utkarsh Gupte
 * [Anjali Phadke](https://www.linkedin.com/in/anjali-phadke-604986251/)
 * [Pranshu Jain](https://www.linkedin.com/in/pranshu-jain-7689041a5/)
+* Utkarsh Gupte
 
 ## Current Goals
 
