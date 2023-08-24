@@ -20,7 +20,7 @@ const InfoCard = ({ imageSrc, name, experience, linkedIn, instagram, github, isW
           <div style={{ fontSize: "14px" }}>{name}</div>
           <div>Branch : ETC</div>
           <div>Section : B</div>
-          <div>Batch : 2019</div>
+          <div>Batch : 2019-23</div>
           <div>Interned @ {experience}</div>
           <div
             className={cx("links", {
