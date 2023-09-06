@@ -9,6 +9,8 @@ import {
   draw,
 } from "face-api.js";
 
+import { DrawBoxOptions } from "face-api.js/build/commonjs/draw";
+
 let image;
 let canvas;
 
@@ -55,12 +57,15 @@ export const executeRecognition = async (imageFile, index, studentDataRcvd, hash
 
   results.forEach((result, i) => {
     const box = resizeDetections[i].detection.box;
-    const drawBox = new draw.DrawBox(box);
+    const options = new DrawBoxOptions();
+
+    if (result.label === "unknown") options.boxColor = "red";
+
+    const drawBox = new draw.DrawBox(box, options);
     drawBox.draw(canvas);
   });
   document.querySelector(`#holder${index}`).appendChild(canvas);
 
   canvas.style.position = "absolute";
   canvas.style.top = "0";
-  canvas.setAttribute("willUseReadFrequently", "true");
 };
