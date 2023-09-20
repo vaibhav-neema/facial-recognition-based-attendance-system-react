@@ -319,12 +319,22 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
               <div className="buttons-web">
                 <Button
+                  title="Load Data"
+                  iconType="database"
+                  labelKey="dbInput"
+                  isDatabase={true}
+                  isDisabled={disableDBButtonState}
+                  onClickHandler={getFilteredData}
+                  isWeb
+                />
+                <Button
+                  title="Upload Photo(s)"
                   iconType="cloud_upload"
                   labelKey="upload"
                   onClickHandler={uploadButtonClickHandler}
                   isDisabled={disableUploadButtonState}
+                  isWeb
                 />
-                <Button iconType="database" labelKey="dbInput" isDatabase={true} isDisabled={disableDBButtonState} />
               </div>
             </div>
           ) : (
@@ -377,12 +387,19 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
               <div className="buttons">
                 <Button
+                  title="Load Data"
+                  iconType="database"
+                  labelKey="dbInput"
+                  isDatabase={true}
+                  isDisabled={disableDBButtonState}
+                />
+                <Button
+                  title="Upload Photo(s)"
                   iconType="cloud_upload"
                   labelKey="upload"
                   onClickHandler={uploadButtonClickHandler}
                   isDisabled={disableUploadButtonState}
                 />
-                <Button iconType="database" labelKey="dbInput" isDatabase={true} isDisabled={disableDBButtonState} />
               </div>
             </>
           )}

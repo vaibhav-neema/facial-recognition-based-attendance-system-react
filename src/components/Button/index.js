@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import "./index.scss";
 
-const Button = ({ labelKey, iconType, onClickHandler, isWeb, isDatabase, isDisabled }) => {
+const Button = ({ title, labelKey, iconType, onClickHandler, isWeb, isDatabase, isDisabled }) => {
   return (
     <button
       className={cx(isWeb ? "button-web" : "button-mobile", {
@@ -22,11 +22,13 @@ const Button = ({ labelKey, iconType, onClickHandler, isWeb, isDatabase, isDisab
       >
         {iconType}
       </label>
+      <label htmlFor={labelKey}>{title}</label>
     </button>
   );
 };
 
 Button.defaultProps = {
+  title: "",
   labelKey: "",
   iconType: "",
   onClickHandler: () => {},
@@ -36,6 +38,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
+  title: PropTypes.string,
   labelKey: PropTypes.string,
   iconType: PropTypes.string,
   onClickHandler: PropTypes.func,

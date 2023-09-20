@@ -123,18 +123,28 @@
 }
 
 .buttons {
-  width: 100%;
+  width: 98%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 2%;
+  cursor: pointer;
+
+  label {
+    cursor: pointer;
+  }
 }
 
 .buttons-web {
-  width: 100%;
+  width: 98%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+
+  label {
+    cursor: pointer;
+  }
 }
 
 .db-selector {
@@ -154,6 +164,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
 
   form {
     width: 100%;

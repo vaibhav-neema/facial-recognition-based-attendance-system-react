@@ -1,29 +1,42 @@
 .button-mobile {
-  width: 46%;
-  margin: 2% 1em 0 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2% 0.25rem 0 0.25rem;
   padding: 1em;
   background-color: #1b5e20;
   color: white;
+  font-family: Geologica;
+  font-style: normal;
+  font-weight: bold;
   border: none;
   border-radius: 2em;
   cursor: pointer;
 
-  label {
-    width: 100%;
+  label:nth-child(1) {
+    margin-right: 5%;
   }
 }
 
 .button-web {
-  width: 46%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2% 0.25rem 0 0.25rem;
   padding: 1em;
-  background-color: rgba(46, 108, 54, 1);
+  background-color: #1b5e20;
   color: white;
+  font-family: Geologica;
+  font-style: normal;
+  font-weight: bold;
   border: none;
   border-radius: 2em;
   cursor: pointer;
 
-  label {
-    width: 100%;
+  label:nth-child(1) {
+    margin-right: 5%;
   }
 }
 
