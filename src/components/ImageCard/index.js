@@ -96,6 +96,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
   };
 
   const handleUploadChange = async (event) => {
+    const start = Date.now();
     if (event.target.files.length === 0) return;
 
     setShowImageIcon(false);
@@ -119,6 +120,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
     }
 
     for (let i = 0; i < imageFiles.length; i++) {
+      
       await executeRecognition(imageFiles[i], i, filteredData.current, studentDataHashMap, dimensions, isWeb);
       document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
     }
@@ -142,11 +144,14 @@ const ImageCard = ({ labelKey, isWeb }) => {
     });
 
     textBox.value += `\nTotal Students : ${detected}`;
-    textBox.value += `\nUnknown Students : ${studentDataHashMap.get("unknown")}`;
+    textBox.value += `\nUnknown Students : ${studentDataHashMap.get("unknown")}\n`;
 
     setShowDownloadButton(true);
 
     window.scrollTo(0, document.body.scrollHeight);
+    const duration = Date.now() - start;
+    console.log(duration);
+    textBox.value += duration;
   };
 
   const uploadButtonClickHandler = () => {
