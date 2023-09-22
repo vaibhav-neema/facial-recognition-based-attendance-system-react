@@ -7,6 +7,8 @@ import { executeRecognition } from "../../utils/executeRecognition";
 import { downloadAttendance } from "../../utils/downloadAttendance";
 import { getStudentDespData, filterData } from "../../utils/fetchData";
 
+// import dummyImage from "../../assets/images/Team/ShubhLaad.jpg";
+
 import Button from "../Button";
 import TextBox from "../TextBox";
 import BackDrop from "../BackDrop";
@@ -32,6 +34,23 @@ const ImageCard = ({ labelKey, isWeb }) => {
   const [newBatch, setNewBatch] = useState("");
   const [newBranch, setNewBranch] = useState("");
   const [newSection, setNewSection] = useState("");
+
+  // const generateBlob = async () => {
+  //   var dummy = document.querySelector("#dummy-image");
+
+  //   fetch(dummyImage)
+  //     .then(function (response) {
+  //       return response.blob();
+  //     })
+  //     .then(function (myBlob) {
+  //       var objectURL = URL.createObjectURL(myBlob);
+  //       dummy.src = objectURL;
+  //     });
+
+  //   await detectAllFaces(dummy, new SsdMobilenetv1Options({ minConfidence: 0.35 }))
+  //   .withFaceLandmarks()
+  //   .withFaceDescriptors();
+  // };
 
   useEffect(() => {
     setDisableUploadButtonState(true);
@@ -120,8 +139,8 @@ const ImageCard = ({ labelKey, isWeb }) => {
     }
 
     for (let i = 0; i < imageFiles.length; i++) {
-      
-      await executeRecognition(imageFiles[i], i, filteredData.current, studentDataHashMap, dimensions, isWeb);
+      const bufferImage = await bufferToImage(imageFiles[i]);
+      await executeRecognition(bufferImage, i, filteredData.current, studentDataHashMap, dimensions, isWeb);
       document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
     }
 
