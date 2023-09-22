@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { loadModels } from "../../utils/loadedModels";
+import { getStudentDespData } from "../../utils/fetchData";
 
 import AppBar from "../../components/AppBar";
 import ImageCard from "../../components/ImageCard";
+import BackDrop from "../../components/BackDrop";
 
 const HomePage = () => {
   const [windowWidth, setWindowWidth] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
+  const [showBackDrop, setShowBackDrop] = useState(false);
+  const [backDropText, setBackDropText] = useState("Preparing System...");
+
+  const studentData = useRef([]);
 
   const updateDimensions = () => {
     const width = window.innerWidth;
@@ -42,14 +48,24 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    // load the models when homePage mounts
-    loadModels();
+    setShowBackDrop(true);
+
+    loadModels().then(() => {
+      setBackDropText("Loading Database...");
+      getStudentDespData()
+        .then(async (value) => {
+          studentData.current = await value;
+        })
+        .then(() => setShowBackDrop(false));
+    });
   }, []);
 
   return (
     <div id="root-container">
       <AppBar isWeb={!isMobile()} />
-      <ImageCard labelKey="upload" isWeb={!isMobile()} />
+      <ImageCard labelKey="upload" isWeb={!isMobile()} studentData={studentData.current} />
+
+      {showBackDrop && <BackDrop title={backDropText} />}
     </div>
   );
 };

@@ -6,34 +6,18 @@ import {
   SsdMobilenetv1Options,
   resizeResults,
   draw,
-  bufferToImage
+  bufferToImage,
 } from "face-api.js";
 
 import { DrawBoxOptions } from "face-api.js/build/commonjs/draw";
 
-import dummyImage from '../assets/images/Team/ShubhLaad.jpg';
-
 let image;
 let canvas;
 
-const generateBlob = async () => {
-  console.log(document);
-  const img = document.body.children[1].innerHTML;
-  console.log(img);
-  img.src = "https://www.seekpng.com/png/full/60-604032_face-businessman-png-dummy-images-for-testimonials.png";
-  console.log(img);
-
-  await detectAllFaces(img, new SsdMobilenetv1Options({ minConfidence: 0.35 }))
-    .withFaceLandmarks()
-    .withFaceDescriptors();
-};
-
-generateBlob();
-
-export const executeRecognition = async (bufferData, index, studentDataRcvd, hashMap, dimensions, isWeb) => {
+export const executeRecognition = async (imageFile, index, studentDataRcvd, hashMap, dimensions, isWeb) => {
   const studentData = studentDataRcvd;
 
-  image = bufferData;
+  image = await bufferToImage(imageFile);
   canvas = createCanvas(image);
 
   const refWidth = isWeb ? dimensions.width / 1.91 : dimensions.width;
@@ -54,10 +38,10 @@ export const executeRecognition = async (bufferData, index, studentDataRcvd, has
   const detections = await detectAllFaces(image, new SsdMobilenetv1Options({ minConfidence: 0.35 }))
     .withFaceLandmarks()
     .withFaceDescriptors();
-  console.log("BufferTime: ", Date.now()-start);
+  console.log("BufferTime: ", Date.now() - start);
   const resizeDetections = resizeResults(detections, displaySize);
   const results = resizeDetections.map((d) => new FaceMatcher(studentData, 0.51).findBestMatch(d.descriptor));
-  
+
   const markAttendance = (name) => {
     let num = hashMap.get(name);
     num++;

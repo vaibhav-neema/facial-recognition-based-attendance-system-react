@@ -5,20 +5,17 @@ import PropTypes from "prop-types";
 import { bufferToImage } from "face-api.js";
 import { executeRecognition } from "../../utils/executeRecognition";
 import { downloadAttendance } from "../../utils/downloadAttendance";
-import { getStudentDespData, filterData } from "../../utils/fetchData";
-
-// import dummyImage from "../../assets/images/Team/ShubhLaad.jpg";
+import { filterData } from "../../utils/fetchData";
 
 import Button from "../Button";
 import TextBox from "../TextBox";
-import BackDrop from "../BackDrop";
 
 import "./index.scss";
 
-const ImageCard = ({ labelKey, isWeb }) => {
+const ImageCard = ({ labelKey, isWeb, studentData }) => {
   const imageFiles = [];
   let filteredData = useRef([]);
-  const studentData = useRef([]);
+
   const refContainer = useRef();
   const [dimensions, setDimensions] = useState({ width: 0 });
 
@@ -26,39 +23,17 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
   const [showImageIcon, setShowImageIcon] = useState(true);
   const [showDownloadButton, setShowDownloadButton] = useState(false);
-  const [showBackDrop, setShowBackDrop] = useState(false);
   const [disableDBButtonState, setDisableDBButtonState] = useState(false);
   const [disableUploadButtonState, setDisableUploadButtonState] = useState(false);
+
   const [sectionB, setSectionB] = useState(true);
 
   const [newBatch, setNewBatch] = useState("");
   const [newBranch, setNewBranch] = useState("");
   const [newSection, setNewSection] = useState("");
 
-  // const generateBlob = async () => {
-  //   var dummy = document.querySelector("#dummy-image");
-
-  //   fetch(dummyImage)
-  //     .then(function (response) {
-  //       return response.blob();
-  //     })
-  //     .then(function (myBlob) {
-  //       var objectURL = URL.createObjectURL(myBlob);
-  //       dummy.src = objectURL;
-  //     });
-
-  //   await detectAllFaces(dummy, new SsdMobilenetv1Options({ minConfidence: 0.35 }))
-  //   .withFaceLandmarks()
-  //   .withFaceDescriptors();
-  // };
-
   useEffect(() => {
     setDisableUploadButtonState(true);
-    setShowBackDrop(true);
-    getStudentDespData().then(async (value) => {
-      studentData.current = await value;
-      setShowBackDrop(false);
-    });
   }, []);
 
   useEffect(() => {
@@ -139,8 +114,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
     }
 
     for (let i = 0; i < imageFiles.length; i++) {
-      const bufferImage = await bufferToImage(imageFiles[i]);
-      await executeRecognition(bufferImage, i, filteredData.current, studentDataHashMap, dimensions, isWeb);
+      await executeRecognition(imageFiles[i], i, filteredData.current, studentDataHashMap, dimensions, isWeb);
       document.querySelector(`#holder${i}`).removeChild(document.querySelector("#is-computing-label"));
     }
 
@@ -227,7 +201,7 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
   const getFilteredData = async (event) => {
     event.preventDefault();
-    const fetchedStudentData = await studentData.current;
+    const fetchedStudentData = await studentData;
     filteredData.current = filterData(newBatch, newBranch, newSection, fetchedStudentData);
 
     if (filteredData.current.length === 0) {
@@ -244,8 +218,6 @@ const ImageCard = ({ labelKey, isWeb }) => {
 
   return (
     <>
-      {showBackDrop && <BackDrop />}
-
       <div className="image-card-component">
         <div
           className={cx("image-container", {
