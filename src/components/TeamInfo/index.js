@@ -77,7 +77,7 @@ const TeamInfo = ({ isOpen, onClose, isWeb }) => {
             <div className="separator"></div>
 
             <InfoCard
-              name="Divanshu Parwal"
+              name="Divyanshu Parwal"
               imageSrc={divyanshu}
               experience={"Capillary "}
               linkedIn={"https://www.linkedin.com/in/divyanshu-parwal/"}

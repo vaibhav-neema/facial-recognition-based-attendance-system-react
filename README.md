@@ -21,7 +21,7 @@
 - Language : JavaScript
 - Framework : ReactJS
 - Database : MongoDB
-- APIs : FaceAPI, ImageKit
+- Packages : FaceAPI, ImageKit
 
 ## Contributions
 
