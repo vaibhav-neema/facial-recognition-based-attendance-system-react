@@ -142,9 +142,9 @@ const ImageCard = ({ labelKey, isWeb, studentData }) => {
     setShowDownloadButton(true);
 
     window.scrollTo(0, document.body.scrollHeight);
+
     const duration = Date.now() - start;
-    console.log(duration);
-    textBox.value += duration;
+    textBox.value += `\nComputational Time : ${duration} ms`;
   };
 
   const uploadButtonClickHandler = () => {
