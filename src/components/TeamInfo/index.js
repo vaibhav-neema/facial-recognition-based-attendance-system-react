@@ -65,18 +65,6 @@ const TeamInfo = ({ isOpen, onClose, isWeb }) => {
             <div className="separator"></div>
 
             <InfoCard
-              name="Sumiran Jaiswal"
-              imageSrc={sumiran}
-              experience={"IIT-Indore"}
-              linkedIn={"https://www.linkedin.com/in/sumiran-jaiswal-b8199a21b/"}
-              instagram={"https://www.instagram.com/_sumi0309/"}
-              github={"https://github.com/sumi0309"}
-              isWeb={isWeb}
-            />
-
-            <div className="separator"></div>
-
-            <InfoCard
               name="Divyanshu Parwal"
               imageSrc={divyanshu}
               experience={"Capillary "}
@@ -85,6 +73,19 @@ const TeamInfo = ({ isOpen, onClose, isWeb }) => {
               github={"https://github.com/DivyanshuParwal"}
               isWeb={isWeb}
             />
+
+            <div className="separator"></div>
+
+            <InfoCard
+              name="Sumiran Jaiswal"
+              imageSrc={sumiran}
+              experience={"IIT-Indore"}
+              linkedIn={"https://www.linkedin.com/in/sumiran-jaiswal-b8199a21b/"}
+              instagram={"https://www.instagram.com/_sumi0309/"}
+              github={"https://github.com/sumi0309"}
+              isWeb={isWeb}
+            />
+            
           </div>
         </div>
       </div>

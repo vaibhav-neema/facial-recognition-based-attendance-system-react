@@ -48,9 +48,9 @@
 - Developers
 
 * [Shubh Laad](https://www.linkedin.com/in/shubh-laad-890a171aa/)
-* [Sumiran Jaiswal](https://www.linkedin.com/in/sumiran-jaiswal-b8199a21b/)
 * [Antriksh Tyagi](https://www.linkedin.com/in/antrikshtyagi/)
 * [Divyanshu Parwal](https://www.linkedin.com/in/divyanshu-parwal/)
+* [Sumiran Jaiswal](https://www.linkedin.com/in/sumiran-jaiswal-b8199a21b/)
 
 - Database Management & Documentation
 
