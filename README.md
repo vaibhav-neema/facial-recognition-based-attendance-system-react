@@ -12,7 +12,7 @@
 
 ## Achievement
 
-- **Idea Patent Filed @ Intellectual Property India**
+- **Idea Patent Filed & Granted by the Indian Patent Office (Patent Number 539692)**
 - [Indian Patent Advanced Seach System](https://iprsearch.ipindia.gov.in/PublicSearch/PublicationSearch/ApplicationStatus) - Application No. (**202321040600**)
 
 ## Technologies Used
