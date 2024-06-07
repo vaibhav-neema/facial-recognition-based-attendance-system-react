@@ -30,11 +30,11 @@ const InfoCard = ({ imageSrc, name, experience, linkedIn, instagram, github, isW
             <a href={linkedIn} target="_blank" rel="noreferrer">
               <img src={linkedInLogo} alt="LinkedIn" />
             </a>
-            <a href={instagram} target="_blank" rel="noreferrer">
-              <img src={instgramLogo} alt="Instagram" />
-            </a>
             <a href={github} target="_blank" rel="noreferrer">
               <img src={gitLogo} alt="GitHub" />
+            </a>
+            <a href={instagram} target="_blank" rel="noreferrer">
+              <img src={instgramLogo} alt="Instagram" />
             </a>
           </div>
         </div>
