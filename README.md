@@ -1,4 +1,4 @@
-## A System and Method for Taking Attendance in Educational and Professional Settings
+## A Facial Recognition Enabled Attendance System Based On Machine Learning
 
 - Web Application for a Smart Attendance System based on Facial Recognition Method
 

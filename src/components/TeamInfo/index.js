@@ -45,8 +45,8 @@ const TeamInfo = ({ isOpen, onClose, isWeb }) => {
               imageSrc={shubh}
               experience={"Paytm"}
               linkedIn={"https://www.linkedin.com/in/shubh-laad-890a171aa/"}
-              instagram={"https://www.instagram.com/shubh_laad/"}
               github={"https://github.com/shubh-laad"}
+              instagram={"https://www.instagram.com/shubh_laad/"}
               isWeb={isWeb}
             />
 
@@ -57,8 +57,8 @@ const TeamInfo = ({ isOpen, onClose, isWeb }) => {
               imageSrc={antriksh}
               experience={"IIT-Indore"}
               linkedIn={"https://www.linkedin.com/in/antrikshtyagi/"}
-              instagram={"https://www.instagram.com/antrikshptyagi/"}
               github={"https://github.com/AntrikshTyagi"}
+              instagram={"https://www.instagram.com/antrikshptyagi/"}
               isWeb={isWeb}
             />
 
@@ -69,8 +69,8 @@ const TeamInfo = ({ isOpen, onClose, isWeb }) => {
               imageSrc={divyanshu}
               experience={"Capillary "}
               linkedIn={"https://www.linkedin.com/in/divyanshu-parwal/"}
-              instagram={"https://www.instagram.com/divyanshu_parwal/"}
               github={"https://github.com/DivyanshuParwal"}
+              instagram={"https://www.instagram.com/divyanshu_parwal/"}
               isWeb={isWeb}
             />
 
@@ -81,8 +81,8 @@ const TeamInfo = ({ isOpen, onClose, isWeb }) => {
               imageSrc={sumiran}
               experience={"IIT-Indore"}
               linkedIn={"https://www.linkedin.com/in/sumiran-jaiswal-b8199a21b/"}
-              instagram={"https://www.instagram.com/_sumi0309/"}
               github={"https://github.com/sumi0309"}
+              instagram={"https://www.instagram.com/_sumi0309/"}
               isWeb={isWeb}
             />
             
